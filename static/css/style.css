@@ -1,0 +1,783 @@
+/* Bootstrap effect remover start */
+
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+[type="text"].form-control:focus,
+[type="password"].form-control:focus,
+[type="email"].form-control:focus,
+[type="tel"].form-control:focus,
+[contenteditable].form-control:focus {
+  box-shadow: inset 0 -1px 0 #ddd;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Bootstrap effect remover end */
+
+/* ===== Fonts ====== */
+
+@font-face {
+  src: url(../fonts/logo-font.ttf);
+  font-family: logo-font;
+}
+
+/* ===== Fonts ====== */
+
+/* custom buttons */
+.details-btn{
+  padding: 2px;
+  background-color: #80D5F9;
+  border-radius: 3px;
+  width: 60px;
+}
+.update-btn{
+  padding: 2px;
+  background-color: #0d6efd;
+  border-radius: 3px;
+  width: 60px;
+}
+.delete-btn{
+  padding: 2px;
+  background-color: #ff0101;
+  border-radius: 3px;
+  width: 60px;
+}
+.details-btn:hover{
+  border: 1px solid black;
+} 
+.update-btn:hover{
+  border: 1px solid black;
+}
+.delete-btn:hover{
+  border: 1px solid black;
+}
+
+/* ================ Home Page ================ */
+
+.logo-row {
+  background: #80d5f9;
+}
+
+.logo {
+  font-family: logo-font;
+  font-size: 60px;
+  color: #fff;
+}
+
+/* ----------Navbar part ------------ */
+
+.search-bar input {
+  color: rgb(160, 160, 160);
+  padding-left: 20px;
+  width: 350px;
+  height: 50px;
+  outline: none;
+  border: none;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.search-bar input::placeholder {
+  color: rgb(160, 160, 160);
+}
+
+.search-bar button {
+  width: 50px;
+  background: black;
+  color: #fff;
+  outline: none;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.icon-section a {
+  text-decoration: none;
+  color: black;
+}
+
+.icons {
+  margin: 10px;
+  font-size: 25px;
+}
+
+.nav-links {
+  border-bottom: 3px solid #80d5f9;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 55px;
+  margin-right: 55px;
+  color: #80d5f9;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 18px;
+  width: 100px;
+  transition: 0.2s ease-in;
+}
+
+.nav-links a.active {
+  background: #80d5f9;
+  color: black;
+}
+
+.nav-links a:hover {
+  background: #80d5f9;
+  color: black;
+}
+
+/* ----------Navbar part ----------- */
+
+/* ========= Phone navbar ======== */
+
+.phone-navbar-outer {
+  position: fixed;
+  background: #80d5f9;
+  /* background: #fff; */
+  border-top: 3px solid #80d5f9;
+  height: 500px;
+  width: 100%;
+  /* bottom: -70%; */
+  bottom: -440px;
+  /* bottom: 0%; */
+  transition: 0.3s ease-in-out;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  z-index: 1000;
+}
+
+.phone-nav-icon {
+  font-size: 25px;
+  color: #fff;
+  z-index: 1000;
+}
+
+.pop-button {
+  z-index: 1000;
+  position: fixed;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background: black;
+  bottom: 30px;
+  left: 45%;
+  transition: 0.3s ease-in;
+  transform: rotate(0deg);
+}
+
+.pop-button i {
+  color: black !important;
+  z-index: 1000;
+}
+
+.phone_links a {
+  text-decoration: none;
+  margin: 5px;
+  width: 160px;
+  height: 40px;
+  background: #e1f3fa;
+  color: black;
+  border: 3px solid #80d5f9;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.phone-search input {
+  border: 2px solid black !important;
+}
+
+#phone_outer {
+  display: none;
+}
+
+/* ========= Phone navbar ======== */
+
+/* -------- Welcome section ---------- */
+
+.welcome-section h1 {
+  color: #80d5f9;
+}
+
+/* -------- Welcome section ---------- */
+
+/* ================ Home Page ================ */
+
+/* --------- features section start ---------- */
+#features-section h1{
+  color: #80d5f9;
+}
+#features-section span {
+  color: #000000;
+}
+.accordion-item{
+  background-color: #80d5f9;
+}
+.accordion-button{
+  background-color: #80d5f9;
+  color: #000000;
+  font-weight: 600;
+}
+.accordion-button:not(.collapsed) {
+  background-color: #80d5f9;
+  color: #000000;
+  font-weight: 600;
+}
+/* -------- Features section end ---------- */
+/* ---- quotes section start ---------- */
+#quotes-section{
+  background-color: #80d5f9;
+
+}
+.box{
+  padding: 25px;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  background-color: #fff;
+  box-shadow: -10px 25px 50px rgba(0, 0, 0,0.3);
+}
+.box-content{
+  color: #000;
+  font-weight: 500;
+}
+.box-content h4{
+  color: #80d5f9;
+  font-weight: 500;
+}
+/* ------ quotes section end ---------- */
+
+/* ------ review section start ---------- */
+.review-section{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* background: #80d5f9; */
+}
+.swiper-container {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+  filter: blur(4px);
+  background: #80d5f9;
+  /* background: #000; for dark theme*/
+  border-radius: 10px;
+  color: #000;
+  /* color: #fff; for dark theme*/
+}
+.swiper-slide-active {
+  filter: blur(0px);
+
+}
+.review-box{
+  position: relative;
+  width: 100%;
+  padding: 40px;
+}
+.user-details{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.imgBx{
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+/* ------ review section end ---------- */
+
+/* -------- counting section start ------- */
+
+.counting-blocks {
+  background: #80d5f9;
+}
+
+.counting-card {
+  background: #fff;
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  margin: 10px 30px;
+}
+
+.number {
+  font-size: 50px;
+  color: #80d5f9;
+  font-weight: bold;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+/* -------- counting section end ------- */
+
+/* --------- Team Section start --------- */
+
+.colored_span {
+  color: #80d5f9;
+}
+
+.team-card {
+  padding: 30px 0px;
+  width: 400px;
+  height: 500px;
+  border-radius: 20px;
+  margin: 5px 10px;
+  /* background: #80d5f9; */
+}
+
+.avatar img {
+  height: 140px;
+  width: 140px;
+  border: 5px solid #80d5f9;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.team-card h2 {
+  margin: 20px 0px;
+}
+
+.team-card .designation {
+  font-size: 14px;
+  color: rgb(154, 154, 154);
+}
+
+.social a {
+  text-decoration: none;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  /* background: red; */
+  margin: 5px 0px;
+  font-size: 20px;
+  transition: .2s ease-in-out;
+}
+
+.social #fb {
+  background: #395693;
+  color: #fff;
+}
+
+.social #fb:hover {
+  background: #294175;
+}
+
+.social #git {
+  background: rgb(240, 240, 240);
+  color: black;
+}
+
+.social #git:hover {
+  background: rgb(220, 220, 220);
+}
+
+.social #linkedin {
+  background: #0E72A3;
+  color: #fff;
+}
+
+.social #linkedin:hover {
+  background: #064f73;
+}
+/* --------- Team Section end --------- */
+
+/* ---------Footer section start------- */
+
+.footer {
+  background: #3ea6d3;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  color: #fff;
+}
+
+.footer_developers span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.subscription-form input {
+  border: 3px solid black;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-right: none;
+  font-size: 14px;
+}
+
+.subscription-form button {
+  background: black;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-left: none;
+
+}
+
+/* ---------Footer section end------- */
+
+
+/* ---------- Contact page section ----------- */
+
+.contact-card {
+  padding: 20px;
+  width: 500px;
+  border-radius: 10px;
+}
+
+.designation {
+  color: rgb(155, 155, 155);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* .form-section {
+  width: 100%;
+} */
+
+.contact-form input {
+  margin: 10px 0px;
+}
+
+/* ---------- Contact page section ----------- */
+
+/* ---------- Books page section ------------ */
+
+.book-card {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin: 20px 10px;
+  height: 500px;
+  width: 300px;
+}
+
+.book_avatar {
+  width: 300px;
+  background: blue;
+}
+
+.book-card img {
+  width: 300px;
+  height: 300px;
+  /* object-fit: initial; */
+}
+
+.name_section span {
+  color: rgb(155, 155, 155);
+  font-size: 14px;
+}
+
+.name_section h5 {
+  margin: 0;
+  color: black;
+}
+
+.category_box {
+  font-size: 12px;
+  font-weight: bold;
+  color: #005579;
+  height: 22px;
+  width: auto;
+  padding: 5px 10px;
+  margin: 3px 3px;
+  background: #80d5f926;
+  border: 2px solid #80D5F9;
+  border-radius: 4px;
+}
+
+.rate_num {
+  font-weight: bold;
+  color: #80D5F9;
+  font-size: 18px;
+}
+
+#stars {
+  color: #80D5F9;
+}
+
+.filter_bar {
+  height: 80px;
+  padding: 10px 20px;
+  background: #80D5F9;
+}
+
+.cat_filter {
+  height: 40px;
+  width: 200px;
+  padding: 0px 10px;
+  margin: 0px 5px;
+  border-radius: 8px;
+  outline: none;
+  border: 2px solid black;
+}
+
+.book-card-section a {
+  text-decoration: none;
+}
+
+
+/* ---------- Books page section ------------ */
+
+/* ---------- Single books page ------------ */
+
+.details_name {
+  font-size: 18px;
+  font-weight: bold;
+  /* color: grey; */
+}
+
+.details_detail {
+  font-size: 16px;
+  color: grey;
+}
+
+.all_reviews {
+  height: 280px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.all_reviews::-webkit-scrollbar {
+  width: 11px;
+}
+.all_reviews {
+  scrollbar-width: thin;
+  scrollbar-color: #80D5F9;
+}
+.all_reviews::-webkit-scrollbar-track {
+  background: transparent;
+}
+.all_reviews::-webkit-scrollbar-thumb {
+  background-color: #80D5F9;
+  border-radius: 6px;
+  /* border: 3px solid var(--scrollbarBG); */
+}
+
+.review_box img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.review_box {
+  border: 3px solid black;
+  border-radius: 8px;
+}
+
+/* .stars_review {
+  cursor: pointer;
+} */
+
+#star_1, #star_2, #star_3, #star_4, #star_5 {
+  cursor: pointer;
+  color: black;
+}
+
+/* ---------- Single books page ------------ */
+
+/* about section start */
+#about-section{
+  height: 80vh;
+  width: 100%;
+  background-image: url(/images/paralax-book.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.2;
+}
+
+
+/* ------------ Dashboard page ------------ */
+/*
+.profile_pic_section {
+   background: blue;
+}
+*/
+.profile_pic_section img {
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  border: 4px solid black;
+}
+/*
+.profile_info {
+  background: red; 
+}
+*/
+.personal_info_form input {
+  margin: 10px 0px;
+}
+
+.review_slider {
+  height: 250px;
+  overflow-x: auto;
+  /* background: red; */
+}
+
+.review_card {
+  height: 200px;
+  min-width: 350px;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 20px 20px;
+}
+
+.review_card a {
+  text-decoration: none;
+  color: black;
+}
+
+.review_description {
+  width: 350px;
+  padding-right: 10px;
+}
+
+.review_slider::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3);
+	border-radius: 8px;
+	background-color: #F5F5F5;
+}
+
+.review_slider::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+.review_slider::-webkit-scrollbar-thumb
+{
+	border-radius: 8px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #1C1F23;
+}
+
+#avatar_file {
+  display: none;
+}
+
+.book_upload_form input[type="text"], textarea {
+  margin: 10px 0;
+}
+
+.language_select {
+  height: 40px;
+}
+
+.categories label {
+  margin: 7px 0px;
+  cursor: pointer;
+  /* background: rgb(228, 228, 228); */
+  padding: 10px 5px;
+  /* border-radius: 8px; */
+  /* border: 3px solid black; */
+  /* font-size: 18px; */
+}
+
+.categories label span {
+  /* margin: 10px; */
+  cursor: pointer;
+  background: rgb(228, 228, 228);
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 3px solid black;
+  font-size: 18px;
+}
+
+.categories label input[type="checkbox"] {
+  display: none;
+}
+
+.categories label input[type="checkbox"]:checked ~ span {
+  background: black;
+  color: #fff;
+}
+
+#add_book_section {
+  display: none;
+}
+/* ------------ Dashboard page ------------ */
+
+
+/* ----- blogs page ------- */
+#blog-author-img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.heading-border{
+  background: black;
+  color: white;
+  padding: 10px;
+  border: 2px solid #80D5F9;
+  border-radius: 10px;
+}
+.card img{
+  height: 200px; 
+  border-radius: 5px;
+}
+.card-body{
+  padding: 3px 10px !important;
+}
+.card-body p{
+  margin: 0;
+}
+.card-footer{
+  margin: 5px 15px !important;
+  padding: 0 !important;
+  border-top: none !important;
+}
+.my-blogs{
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+/* ----single-blog-page ------ */
+.author-info img{
+  align-items: center;
+  height: 250px;
+  border-radius: 50%;
+}
+.single-blog-section h6{
+  background: black;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+}
+.single-blog-details img{
+  width: 100%;
+  height: 250px;
+}
+.single-blog-details p{
+  text-indent: 50px;
+  text-align: justify;
+}
