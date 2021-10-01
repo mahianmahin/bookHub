@@ -605,7 +605,7 @@ input[type="number"]:focus,
 #about-section{
   height: 80vh;
   width: 100%;
-  background-image: url(/images/paralax-book.jpg);
+  background-image: url(/static/fonts/images/paralax-book.jpg);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
