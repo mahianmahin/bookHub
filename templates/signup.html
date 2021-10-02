@@ -17,22 +17,23 @@
       <div class="login-box">
         <div class="form">
           <h2>Sign-up</h2>
-          <form action="">
+          <form action="" method="post">
+              {% csrf_token %}
             <div class="inputbox">
               <i class="fas fa-user mx-2"></i>
-              <input type="text" placeholder="Enter your first name">
+              <input name="f_name" type="text" placeholder="Enter your first name">
             </div>
             <div class="inputbox">
               <i class="fas fa-user mx-2"></i>
-              <input type="text" placeholder="Enter your last name">
+              <input name="l_name" type="text" placeholder="Enter your last name">
             </div>
             <div class="inputbox">
               <i class="fas fa-envelope mx-2"></i>
-              <input type="text" placeholder="Enter your email address">
+              <input name="email" type="text" placeholder="Enter your email address">
             </div>
             <div class="inputbox">
               <i class="fas fa-unlock-alt mx-2"></i>
-              <input type="password" placeholder="Enter your password">
+              <input name="password" type="password" placeholder="Enter your password">
             </div>
             <div class="inputbox">
               <input type="submit" value="Sign-up">
