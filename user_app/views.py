@@ -17,6 +17,7 @@ def signup(request):
     return render(request, 'signup.html')
 
 def app_login(request):
+    print(request.user)
     if request.method == "POST":
         print("1. Initializing Login system")
         username = request.POST['username']
@@ -36,12 +37,32 @@ def app_login(request):
 
     return render(request, 'login.html')
 
+def app_logout(request):
+    logout(request)
+    print("User logged out")
+
+    return redirect('/')
+
 def forget_password(request):
     context = {}
     return render(request, 'forget-password.html', context=context)
 
 
 def reset_password(request):
+    if not request.user.is_authenticated:
+        if request.method == "POST":
+            new_password = request.POST['new_password']
+            print(new_password)
+
+            user = User.objects.get(username=request.user)
+            user.set_password(new_password)
+            user.save()
+
+            print("Password changed")
+        
+        else:
+            return redirect('/login')
+
     context = {}
     return render(request, 'reset-password.html', context=context)
 
