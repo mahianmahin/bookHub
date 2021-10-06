@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block title %} BookHub | Signup {% endblock title %}
+
 {% block content %}
     <!-- Row for logo and sreachbar start -->
     <div class="container-fluid">
@@ -18,7 +20,7 @@
         <div class="form">
           <h2>Sign-up</h2>
           <form action="" method="post">
-              {% csrf_token %}
+            {% csrf_token %}
             <div class="inputbox">
               <i class="fas fa-user mx-2"></i>
               <input name="f_name" type="text" placeholder="Enter your first name">
