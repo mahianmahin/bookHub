@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %} BookHub | Forget Password {% endblock title %}
+{% block title %} Code Authentication - Forget Password | BookHub {% endblock title %}
 
 {% block content %}
     <!-- Row for logo and sreachbar start -->
@@ -18,12 +18,12 @@
     <section id="login-section">
       <div class="login-box">
         <div class="form">
-          <h3 class='text-center'>Forget-Password</h3>
+          <h3 class='text-center'>Verification Code</h3>
+          <p class="text-white">Check your registered email and enter the code below</p>
           <form method="post">
           {% csrf_token %}
             <div class="inputbox">
-              <i class="fas fa-envelope mx-2"></i>
-              <input name="email" type="email" placeholder="Enter your registered email" required>
+              <input name="code" type="number" style="text-align:center" placeholder="Enter the 4 digit code">
             </div>
             <div class="inputbox">
               <input type="submit" value="submit" class="w-50 mx-auto">

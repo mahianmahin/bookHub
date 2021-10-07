@@ -11,4 +11,6 @@ urlpatterns = [
     path('reset-password', reset_password, name='reset_password'),
     path('user-dashboard', userDashboard, name='user_dashboard'),
     path('update-profile', updateProfile, name='update_profile'),
+    path('code-auth', code_authentication, name="code"),
+    path('reset-forgetten-password', reset_forget_pass, name="reset_forgetten_pass"),
 ]
