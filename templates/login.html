@@ -2,15 +2,17 @@
 
 {% load static %}
 
+{% block title %} BookHub | Login {% endblock title %}
+
 {% block content %}
     <!-- Row for logo and sreachbar start -->
-    <div class="container-fluid">
+    {% comment %} <div class="container-fluid">
       <div class="row logo-row">
         <div class="col-sm-12 text-center text-white">
           <h2 class="my-3 logo">BookHub | login</h2>
         </div>
       </div>
-    </div>
+    </div> {% endcomment %}
 
     <!-- login form start  -->
     <section id="login-section">
@@ -21,17 +23,17 @@
               {% csrf_token %}
             <div class="inputbox">
               <i class="fas fa-envelope mx-2"></i>
-              <input name="username" type="text" placeholder="Enter your email address">
+              <input name="username" type="text" placeholder="Enter your email address" required>
             </div>
             <div class="inputbox">
               <i class="fas fa-unlock-alt mx-2"></i>
-              <input name="password" type="password" placeholder="Enter your password">
+              <input name="password" type="password" placeholder="Enter your password" required>
             </div>
             <div class="inputbox">
               <input type="submit" value="Login" class="w-50 mx-auto">
             </div>
-            <p>Forget <a href="#">Password</a></p>
-            <p>Create a new <a href="#">account</a> </p>
+            <p>Forget <a href={% url 'forget_password' %}>Password</a></p>
+            <p>Create a new <a href={% url 'signup' %}>account</a> </p>
           </form>
         </div>
       </div>
