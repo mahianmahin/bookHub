@@ -24,6 +24,9 @@ def signup(request):
         password = request.POST.get('password')
         user = User.objects.create_user(username=email, first_name=f_name, last_name=l_name, email=email, password=password)
         user.save()
+        
+        messages.success(request, "Registered Successfully!")
+
         return redirect('login')
     return render(request, 'signup.html')
 
@@ -40,16 +43,19 @@ def app_login(request):
             println("2. User is authenticated")
             login(request, user)
             println("3. User logged in")
-            return redirect('/')
+            
+            messages.success(request, "Logged In Successfully!")
+
+            return redirect('/user-dashboard')
 
         else:
-            println("2. User authentication failed")
+            messages.error(request, "Incorrect login credentials!")
 
     return render(request, 'login.html')
 
 def app_logout(request):
     logout(request)
-    println("User logged out")
+    messages.info(request, "Logged Out!")
 
     return redirect('/')
 
@@ -67,7 +73,7 @@ def forget_password(request):
         except:
             request.session['auth_permission'] = False
             
-            return HttpResponse("<h1>This email address is not related to your account</h1>")
+            messages.warning(request, "Email Address Doesn't Exist!")
 
     context = {}
     return render(request, 'forget-password.html', context=context)
@@ -107,6 +113,7 @@ def code_authentication(request):
         context = {}
         return render(request, 'code.html', context)
     else:
+        messages.warning(request, "You Don't Have Persmission To Proceed!")
         return redirect('/forget-password')
 
 def reset_forget_pass(request):
@@ -124,32 +131,40 @@ def reset_forget_pass(request):
             println("Password changed")
             request.session['reset_permission'] = False
 
+            messages.success(request, "Password Reset Successful!")
+
             return redirect('/login')
 
         return render(request, 'reset_forget_pass.html')
     
     else:
+        messages.warning(request, "You Don't Have Persmission To Proceed!")
         return redirect('/')
 
 def reset_password(request):
-    println("Reset password system initialized")
+    if request.user.is_authenticated:
+        println("Reset password system initialized")
 
-    if request.method == "POST":
-        new_password = request.POST['new_password']
-        println(new_password)
+        if request.method == "POST":
+            new_password = request.POST['new_password']
+            println(new_password)
 
-        user = User.objects.get(username=request.user)
-        println(user)
-        user.set_password(new_password)
-        user.save()
+            user = User.objects.get(username=request.user)
+            println(user)
+            user.set_password(new_password)
+            user.save()
 
-        println("Password changed")
+            messages.success(request, "Password Reset Successful!")
 
+            return redirect('/login')
+
+
+        context = {}
+        return render(request, 'reset-password.html', context=context)
+    
+    else:
+        messages.warning(request, "You Must Be Logged In")
         return redirect('/login')
-
-
-    context = {}
-    return render(request, 'reset-password.html', context=context)
 
 
 def userDashboard(request):
@@ -157,9 +172,6 @@ def userDashboard(request):
         context = {}
         return render(request, 'dashboard.html', context=context)
     else:
+        messages.warning(request, "You Must Be Logged In")
         return redirect('/login')
 
-
-def updateProfile(request):
-    context = {}
-    return render(request, 'dashboard.html', context=context)
