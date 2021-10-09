@@ -23,19 +23,19 @@
             {% csrf_token %}
             <div class="inputbox">
               <i class="fas fa-user mx-2"></i>
-              <input name="f_name" type="text" placeholder="Enter your first name">
+              <input name="f_name" type="text" placeholder="Enter your first name" required>
             </div>
             <div class="inputbox">
               <i class="fas fa-user mx-2"></i>
-              <input name="l_name" type="text" placeholder="Enter your last name">
+              <input name="l_name" type="text" placeholder="Enter your last name" required>
             </div>
             <div class="inputbox">
               <i class="fas fa-envelope mx-2"></i>
-              <input name="email" type="text" placeholder="Enter your email address">
+              <input name="email" type="text" placeholder="Enter your email address" required>
             </div>
             <div class="inputbox">
               <i class="fas fa-unlock-alt mx-2"></i>
-              <input name="password" type="password" placeholder="Enter your password">
+              <input name="password" type="password" placeholder="Enter your password" required>
             </div>
             <div class="inputbox">
               <input type="submit" value="Sign-up">
