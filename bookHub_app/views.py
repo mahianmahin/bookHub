@@ -7,13 +7,16 @@ def home(request):
     context = {
         "home": "active"
     }
-    return render(request, 'home.html', context)
+    return render(request, 'index.html', context)
 
 def books(request):
     context = {
         "books": "active"
     }
     return render(request, 'books.html', context=context)
+
+def book_details(request):
+    return render(request, 'book-details.html')
 
 def blogs(request):
     context = {
@@ -31,6 +34,9 @@ def my_blog(request):
     else:
         messages.warning(request, "You must be logged in")
         return redirect('/login')
+
+def single_blog(request):
+    return render(request, 'single-blog.html')
 
 def contact(request):
     context = {
