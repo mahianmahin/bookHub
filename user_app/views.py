@@ -169,7 +169,18 @@ def reset_password(request):
 
 def userDashboard(request):
     if request.user.is_authenticated:
-        context = {}
+        if request.method == "GET":
+            first_name = request.user.first_name
+            last_name = request.user.last_name
+            email = request.user.email
+
+            context = {
+                "f_name": first_name,
+                "l_name": last_name,
+                "email": email,
+            }
+            
+        constext = {}
         return render(request, 'dashboard.html', context=context)
     else:
         messages.warning(request, "You Must Be Logged In")
