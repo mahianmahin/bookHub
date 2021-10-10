@@ -7,10 +7,14 @@ from django.core.mail import send_mail
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 
+
 # ========== Custom printing function for debugging ============
+from user_app.models import UserProfile
+
 
 def println(text):
     print("\n====================\n", text, "\n====================\n")
+
 
 # ========== Custom printing function for debugging ============
 
@@ -22,13 +26,17 @@ def signup(request):
         l_name = request.POST.get('l_name')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        user = User.objects.create_user(username=email, first_name=f_name, last_name=l_name, email=email, password=password)
+        user = User.objects.create_user(username=email, first_name=f_name, last_name=l_name, email=email,
+                                        password=password)
         user.save()
-        
+        # setup userProfile object
+        user_profile = UserProfile(user_id=user.id)
+        user_profile.save()
         messages.success(request, "Registered Successfully!")
 
         return redirect('login')
     return render(request, 'signup.html')
+
 
 def app_login(request):
     println(request.user)
@@ -43,7 +51,7 @@ def app_login(request):
             println("2. User is authenticated")
             login(request, user)
             println("3. User logged in")
-            
+
             messages.success(request, "Logged In Successfully!")
 
             return redirect('/user-dashboard')
@@ -53,11 +61,13 @@ def app_login(request):
 
     return render(request, 'login.html')
 
+
 def app_logout(request):
     logout(request)
     messages.info(request, "Logged Out!")
 
     return redirect('/')
+
 
 def forget_password(request):
     if request.method == "POST":
@@ -69,14 +79,15 @@ def forget_password(request):
             request.session['auth_permission'] = True
 
             return redirect('/code-auth')
-        
+
         except:
             request.session['auth_permission'] = False
-            
+
             messages.warning(request, "Email Address Doesn't Exist!")
 
     context = {}
     return render(request, 'forget-password.html', context=context)
+
 
 def code_authentication(request):
     if 'auth_permission' in request.session and request.session['auth_permission']:
@@ -116,6 +127,7 @@ def code_authentication(request):
         messages.warning(request, "You Don't Have Persmission To Proceed!")
         return redirect('/forget-password')
 
+
 def reset_forget_pass(request):
     if 'reset_permission' in request.session and request.session['reset_permission']:
 
@@ -136,10 +148,11 @@ def reset_forget_pass(request):
             return redirect('/login')
 
         return render(request, 'reset_forget_pass.html')
-    
+
     else:
         messages.warning(request, "You Don't Have Persmission To Proceed!")
         return redirect('/')
+
 
 def reset_password(request):
     if request.user.is_authenticated:
@@ -158,16 +171,15 @@ def reset_password(request):
 
             return redirect('/login')
 
-
         context = {}
         return render(request, 'reset-password.html', context=context)
-    
+
     else:
         messages.warning(request, "You Must Be Logged In")
         return redirect('/login')
 
 
-def userDashboard(request):
+def  userDashboard(request):
     if request.user.is_authenticated:
         if request.method == "GET":
             first_name = request.user.first_name
@@ -179,10 +191,9 @@ def userDashboard(request):
                 "l_name": last_name,
                 "email": email,
             }
-            
+
         constext = {}
         return render(request, 'dashboard.html', context=context)
     else:
         messages.warning(request, "You Must Be Logged In")
         return redirect('/login')
-
