@@ -38,12 +38,12 @@
       <!-- ========== Desktop navbar ========== -->
       <div class="row navbar-desktop" id="hide">
         <div class=" col-sm-12 d-flex flex-row justify-content-center align-items-center nav-links">
-          <a href="index.html" class="d-flex justify-content-center active">Home</a>
-          <a href="books.html" class="d-flex justify-content-center">Books</a>
-          <a href="all-blogs.html" class="d-flex justify-content-center">Blogs</a>
-          <a href="blog.html" class="d-flex justify-content-center">My Blogs</a>
-          <a href="about-us.html" class="d-flex justify-content-center">About Us</a>
-          <a href="contact.html" class="d-flex justify-content-center">Contact Us</a>
+          <a href={% url 'home' %} class="d-flex justify-content-center {{ home }}">Home</a>
+          <a href={% url 'books' %} class="d-flex justify-content-center {{ books }}">Books</a>
+          <a href={% url 'blogs' %} class="d-flex justify-content-center {{ blogs }}">Blogs</a>
+          <a href={% url 'my_blog' %} class="d-flex justify-content-center {{ my_blog }}">My Blogs</a>
+          <a href={% url 'about' %} class="d-flex justify-content-center {{ about }}">About Us</a>
+          <a href={% url 'contact' %} class="d-flex justify-content-center {{ contact }}">Contact Us</a>
         </div>
       </div>
       <!-- ========== Desktop navbar ========== -->
@@ -60,19 +60,20 @@
         <i class="fas fa-angle-up phone-nav-icon"></i>
       </div>
       <div class=" phone-inner d-flex flex-row justify-content-between align-items-center">
-        <a href="#"><i class="fas fa-home phone-nav-icon my-3 mx-4" id="phone_nav_icons"></i></a>
-        <a href="#"><i class="fas fa-book-open phone-nav-icon my-3 mx-4" id="phone_nav_icons"></i></a>
-        <a href="#"><i class="fas fa-blog phone-nav-icon my-3 mx-4" id="phone_nav_icons"></i></a>
-        <a href="#"><i class="fas fa-user phone-nav-icon my-3 mx-4" id="phone_nav_icons"></i></a>
+        <a href={% url 'home' %}><i class="fas fa-home phone-nav-icon my-3 mx-4" id="phone_nav_icons"></i></a>
+        <a href={% url 'books' %}><i class="fas fa-book-open phone-nav-icon my-3 mx-4" id="phone_nav_icons"></i></a>
+        <a href={% url 'blogs' %}><i class="fas fa-blog phone-nav-icon my-3 mx-4" id="phone_nav_icons"></i></a>
+        <a href={% url 'user_dashboard' %}><i class="fas fa-user phone-nav-icon my-3 mx-4" id="phone_nav_icons"></i></a>
       </div>
 
       <div class=" phone_links d-flex flex-row flex-wrap justify-content-center px-3">
-        <a href="index.html" class="text-center d-flex align-items-center justify-content-center">Home</a>
-        <a  href="books.html" class="text-center d-flex align-items-center justify-content-center">Books</a>
-        <a href="all-blogs.html" class="text-center d-flex align-items-center justify-content-center">Blogs</a>
-        <a  href="blog.html" class="text-center d-flex align-items-center justify-content-center">My Blogs</a>
-        <a href="about-us.html" class="text-center d-flex align-items-center justify-content-center">About Us</a>
-        <a href="contact.html" class="text-center d-flex align-items-center justify-content-center">Contact Us</a>
+        <a href={% url 'home' %} class="text-center d-flex align-items-center justify-content-center">Home</a>
+        <a href={% url 'books' %} class="text-center d-flex align-items-center justify-content-center">Books</a>
+        <a href={% url 'blogs' %} class="text-center d-flex align-items-center justify-content-center">Blogs</a>
+        <a href={% url 'my_blog' %} class="text-center d-flex align-items-center justify-content-center">My Blogs</a>
+        <a href={% url 'about' %} class="text-center d-flex align-items-center justify-content-center">About Us</a>
+        <a href={% url 'contact' %} class="text-center d-flex align-items-center justify-content-center">Contact Us</a>
+        
         {% if request.user.is_authenticated %}
           <a href={% url 'logout' %} class="text-center d-flex align-items-center justify-content-center">Logout</a>
           <a href={% url 'user_dashboard' %} class="text-center d-flex align-items-center justify-content-center">Dashboard</a>
@@ -80,6 +81,7 @@
           <a href={% url 'login' %} class="text-center d-flex align-items-center justify-content-center">Login</a>
           <a href={% url 'signup' %} class="text-center d-flex align-items-center justify-content-center">Signup</a>
         {% endif %}
+        
         <!-- Search bar -->
         <div class="search-bar my-3 phone-search mt-3">
           <form method="post" class="d-flex flex-row">
