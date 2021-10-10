@@ -185,31 +185,13 @@ def  userDashboard(request):
             first_name = request.user.first_name
             last_name = request.user.last_name
             email = request.user.email
-            user_profile_data = UserProfile.objects.get(user=request.user.id)
 
             context = {
                 "f_name": first_name,
                 "l_name": last_name,
                 "email": email,
             }
-        if request.method == "POST":
-            f_name = request.POST.get('f_name')
-            l_name = request.POST.get('l_name')
-            pro_pic = request.POST.get('pro_pic')
-            address = request.POST.get('address')
-            occupation = request.POST.get('occupation')
-            bio = request.POST.get('bio')
-            user = User.objects.get(id=request.user.id)
-            user_obj = User(id=request.user.id, first_name=f_name, last_name=l_name)
-            user_profile_obj = UserProfile(user_id=request.user.id, profile_pic= pro_pic, address= address, occupation= occupation,bio=bio)
-            user_obj.save()
-            user_profile_obj.save()
-            println(user_obj)
-            println(user_profile_obj)
-            context={
-                "user_obj": user_obj,
-                "user_profile_obj": user_profile_obj
-            }
+
         constext = {}
         return render(request, 'dashboard.html', context=context)
     else:
