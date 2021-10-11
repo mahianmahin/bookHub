@@ -19,16 +19,16 @@
 
                     <input type="text" name="personal_info" hidden>
 
-                    <input type="text" class="form-control" placeholder="First Name" value={{ f_name }} name="f_name">
-                    <input type="text" class="form-control" placeholder="Last Name" value={{ l_name }} name="l_name">
-                    <input type="email" class="form-control" placeholder="Email" value={{ email }} name="email"  disabled>
+                    <input type="text" class="form-control" placeholder="First Name" value={{ request.user.first_name }} name="f_name">
+                    <input type="text" class="form-control" placeholder="Last Name" value={{ request.user.last_name }} name="l_name">
+                    <input type="email" class="form-control" placeholder="Email" value={{ request.user.email }} name="email"  disabled>
                     <input type="text" class="form-control" placeholder="address"  name="address">
                     <input type="text" class="form-control" placeholder="occupation"  name="occupation">
                     <input type="text" class="form-control" placeholder="Enter Your bio" name="bio">
-                    <div class="d-flex flex-row flex-wrap">
-                        <label for="avatar_file" name="pro_pic" class="btn btn-dark mx-1 my-1">Change Avatar</label>
-                        <a href={% url 'user_dashboard' %}><button type="submit" class="btn btn-success mx-1 my-1">Save Changes</button></a>
-                    </div>
+                    <p>Choose Profile Pic</p>
+                    <input type="file" accept="image/*" name="pro_pic" class="btn btn-dark mx-1 my-1">
+                    <button type="submit" class="btn btn-success mx-1 my-1">Save Changes</button>
+
                 </form>
                         <input type="file" class="btn btn-dark mx-1 my-1" id="avatar_file" accept="image/*">
                         <a href={% url 'reset_password' %}><button class="btn btn-dark mx-1 my-1">Change Password</button></a>
