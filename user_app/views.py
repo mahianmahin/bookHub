@@ -98,7 +98,6 @@ def code_authentication(request):
             auth_number = str(auth_number)
             message_body = "Your password recovery code - " + auth_number
             println(message_body)
-
             send_mail(
                 'Password Reset',
                 message_body,
@@ -179,11 +178,36 @@ def reset_password(request):
         return redirect('/login')
 
 
-def  userDashboard(request):
+def userDashboard(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             if 'personal_info' in request.POST:
                 println('Personal Info form')
+                f_name = request.POST.get('f_name')
+                l_name = request.POST.get('l_name')
+                user_ins = User.objects.get(id=request.user.id)
+                user_ins.first_name = f_name
+                user_ins.last_name = l_name
+                # updating user info
+                user_ins.save()
+                # getting userProfile info
+
+                address = request.POST.get('address')
+                occupation = request.POST.get('occupation')
+                bio = request.POST.get('bio')
+                pro_pic = request.FILES['pro_pic']
+                # user Profile instance
+                user_profile_ins = UserProfile.objects.filter(user_id=request.user.id).first()
+
+                user_profile_ins.occupation = occupation
+                user_profile_ins.address = address
+                user_profile_ins.bio = bio
+                if (pro_pic):
+                    user_profile_ins.profile_pic = pro_pic
+                # update userProfile.
+                user_profile_ins.save()
+
+
 
             if 'book_upload' in request.POST:
                 book_name = request.POST.get('book_name')
@@ -199,29 +223,22 @@ def  userDashboard(request):
                 println(type(book_thumbnail))
 
                 books_ins = Books(
-                    uploader = request.user,
-                    book = book_pdf,
-                    book_thumbnail = book_thumbnail,
-                    book_name = book_name,
-                    author_name = author_name,
-                    description = book_description,
-                    book_category = category_value,
-                    language = language,
+                    uploader=request.user,
+                    book=book_pdf,
+                    book_thumbnail=book_thumbnail,
+                    book_name=book_name,
+                    author_name=author_name,
+                    description=book_description,
+                    book_category=category_value,
+                    language=language,
                 )
 
                 books_ins.save()
 
                 println("Data saved")
 
-
-        first_name = request.user.first_name
-        last_name = request.user.last_name
-        email = request.user.email
-
         context = {
-            "f_name": first_name,
-            "l_name": last_name,
-            "email": email,
+
         }
 
         return render(request, 'dashboard.html', context=context)
