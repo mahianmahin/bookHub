@@ -35,13 +35,25 @@
 {% endif %}
 
 <script>
-    (() => {
-        setTimeout(() => {
-            document.getElementById("message").style.opacity = 0;
-        }, 5000);
-        
-        setTimeout(() => {
-            document.getElementById("message").style.display = "none";
-        }, 6000);
-    })();
+    try {
+        (() => {
+            setTimeout(() => {
+                try {
+                    document.getElementById("message").style.opacity = 0;
+                } catch(error) {
+                    //pass
+                }
+            }, 5000);
+            
+            setTimeout(() => {
+                try {
+                    document.getElementById("message").style.display = "none";
+                } catch(error) {
+                    //pass
+                }
+            }, 6000);
+        })();
+    } catch(error) {
+        //pass
+    }
 </script>

@@ -14,8 +14,11 @@
 
             <div class="col-sm-7 my-3 profile_info">
                 <h3>Personal Infotmation</h3>
-                <form method="post" class="form-group my-3 personal_info_form">
+                <form method="post" class="form-group my-3 personal_info_form" enctype="multipart/form-data">
                     {% csrf_token %}
+
+                    <input type="text" name="personal_info" hidden>
+
                     <input type="text" class="form-control" placeholder="First Name" value={{ f_name }} name="f_name">
                     <input type="text" class="form-control" placeholder="Last Name" value={{ l_name }} name="l_name">
                     <input type="email" class="form-control" placeholder="Email" value={{ email }} name="email"  disabled>
@@ -121,107 +124,132 @@
 
         <div class="row add_book_form my-3" id="add_book_section">
             <h4 class="my-3">Add A New Book</h4>
-            <form class="form-group book_upload_form">
-                <input type="text" class="form-control" placeholder="Book Name">
-                <input type="text" class="form-control" placeholder="Author Name">
+            <form class="form-group book_upload_form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <input type="text" name="book_upload" hidden>
+
+                <input type="text" class="form-control" placeholder="Book Name" name="book_name">
+                <input type="text" class="form-control" placeholder="Author Name" name="author_name">
                 <select name="language" class="form-crontrol w-100 language_select">
                     <option value="--" disabled selected>Select Book Language</option>
                     <option value="Bangla">Bangla</option>
                     <option value="English">English</option>
                 </select>
-                <textarea rows="3" class="form-control" placeholder="Book Description"></textarea>
+                <textarea rows="3" class="form-control" placeholder="Book Description" name="book_description"></textarea>
                 <h5>Select Book Categories</h5>
                 <div class="categories d-flex flex-row flex-wrap">
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Action and Adventure" id="checkbox">
                         <span>Action and adventure</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Art/Architecture" id="checkbox">
                         <span>Art/architecture</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="History" id="checkbox">
                         <span>History</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Biography" id="checkbox">
                         <span>Biography</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Comic Book" id="checkbox">
                         <span>Comic book</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Crime" id="checkbox">
                         <span>Crime</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Drama" id="checkbox">
                         <span>Drama</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Health/Fitness" id="checkbox">
                         <span>Health/fitness</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Humor" id="checkbox">
                         <span>Humor</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Horror" id="checkbox">
                         <span>Horror</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Journal" id="checkbox">
                         <span>Journal</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Romance" id="checkbox">
                         <span>Romance</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Philosophy" id="checkbox">
                         <span>Philosophy</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Prayer" id="checkbox">
                         <span>Prayer</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Islamic" id="checkbox">
                         <span>Islamic</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Thriller" id="checkbox">
                         <span>Thriller</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Crime" id="checkbox">
                         <span>Crime</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Science" id="checkbox">
                         <span>Science</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Suspense" id="checkbox">
                         <span>Suspense</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" class="checkbox" value="Travel" id="checkbox">
                         <span>Travel</span>
                     </label>
                 </div>
 
+                <input type="text" id="categories_field" name="category_value" hidden>
+
                 <h5 class="my-3">Select Book Pdf File</h5>
-                <input type="file" accept="pdf" class="btn btn-dark">
+                <input type="file" accept=".pdf,.doc" class="btn btn-dark" name="book_pdf">
+                
+                <h5 class="my-3">Select Book Thumbnail</h5>
+                <input type="file" accept="image/*" class="btn btn-dark" name="book_thumb">
+                
                 <br><br>
                 <input type="submit" value="Save" class="btn btn-success">
-                <button id="close_book_add" class="btn btn-danger">Cancel</button>
+                <span id="close_book_add" class="btn btn-danger">Cancel</span>
             </form>
         </div>
     </div>
-    
+
+    <script>
+        var list = [];
+        
+        for(var checkbox of document.querySelectorAll('.checkbox')) {
+            checkbox.addEventListener('click', (e) => {
+                if(e.target.checked == true) {
+                    list.push(e.target.value);
+                    document.getElementById('categories_field').value = list.join(', ');
+                } else {
+                    list = list.filter(f => f !== e.target.value);
+                    document.getElementById('categories_field').value = list.join(', ');
+                }
+            })
+        }
+    </script>    
 
 {% endblock %}

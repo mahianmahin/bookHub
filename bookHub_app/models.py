@@ -1,14 +1,17 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
+
 class Books(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30,null=True, blank=True)
-    # category = models.Choices(default='none')
-    description = models.CharField(max_length=250,null=True, blank=True)
-    upload_time = models.DateTimeField()
-    writer_name = models.CharField(max_length=50,null=True, blank=True)
+    uploader = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.FileField(upload_to='pdf', blank=True)
+    book_thumbnail = models.ImageField(upload_to='pdf/thumbnails', null=True, blank=True)
+    book_name = models.CharField(max_length=200, null=True)
+    language = models.CharField(max_length=100, null=True)
+    author_name = models.CharField(max_length=200, null=True)
+    description = models.TextField()
+    uploaded_time = models.DateTimeField(auto_now=True)
+    book_category = models.CharField(max_length=1000, null=True)
 
 class BooksReview(models.Model):
     book = models.ForeignKey(Books, on_delete=models.CASCADE)

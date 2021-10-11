@@ -1,12 +1,12 @@
 import random
 
+from bookHub_app.models import *
 from django.contrib import auth, messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-
 
 # ========== Custom printing function for debugging ============
 from user_app.models import UserProfile
@@ -181,18 +181,49 @@ def reset_password(request):
 
 def  userDashboard(request):
     if request.user.is_authenticated:
-        if request.method == "GET":
-            first_name = request.user.first_name
-            last_name = request.user.last_name
-            email = request.user.email
+        if request.method == "POST":
+            if 'personal_info' in request.POST:
+                println('Personal Info form')
 
-            context = {
-                "f_name": first_name,
-                "l_name": last_name,
-                "email": email,
-            }
+            if 'book_upload' in request.POST:
+                book_name = request.POST.get('book_name')
+                author_name = request.POST.get('author_name')
+                language = request.POST.get('language')
+                book_description = request.POST.get('book_description')
+                category_value = request.POST.get('category_value')
+                book_pdf = request.POST.get('book_pdf')
+                book_pdf = request.FILES['book_pdf']
+                book_thumbnail = request.FILES['book_thumb']
 
-        constext = {}
+                println(type(book_pdf))
+                println(type(book_thumbnail))
+
+                books_ins = Books(
+                    uploader = request.user,
+                    book = book_pdf,
+                    book_thumbnail = book_thumbnail,
+                    book_name = book_name,
+                    author_name = author_name,
+                    description = book_description,
+                    book_category = category_value,
+                    language = language,
+                )
+
+                books_ins.save()
+
+                println("Data saved")
+
+
+        first_name = request.user.first_name
+        last_name = request.user.last_name
+        email = request.user.email
+
+        context = {
+            "f_name": first_name,
+            "l_name": last_name,
+            "email": email,
+        }
+
         return render(request, 'dashboard.html', context=context)
     else:
         messages.warning(request, "You Must Be Logged In")
