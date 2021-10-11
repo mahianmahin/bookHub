@@ -130,3 +130,28 @@ try {
 } catch (error) {
     // pass
 }
+
+// console.log("Working");
+// let list = [];
+// try {
+//     let hidden_field = document.getElementById("categories_field");
+//     let cat = document.querySelectorAll('.cat');
+// } catch (error) {
+//     //pass
+// }
+
+// for(var checkbox of cat) {
+//     checkbox.addEventListener('click', () => {
+//         if(this.checked == true) {
+//             list.push(this.value);
+//             hidden_field.value = list.join(', ');
+                
+//             console.log('adding');
+//         } else {
+//             new_list = list.filter(e => e !== this.value);
+//             hidden_field.value = list.join(', ');
+
+//             console.log('removing');
+//         }
+//     })
+// }
