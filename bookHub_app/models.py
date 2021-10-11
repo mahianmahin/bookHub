@@ -5,11 +5,12 @@ from django.db import models
 class Books(models.Model):
     uploader = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.FileField(upload_to='pdf')
-    book_name = models.CharField(max_length=200)
-    author_name = models.CharField(max_length=200)
+    book_name = models.CharField(max_length=200, null=True)
+    language = models.CharField(max_length=100, null=True)
+    author_name = models.CharField(max_length=200, null=True)
     description = models.TextField()
     uploaded_time = models.DateTimeField(auto_now=True)
-    book_category = models.CharField(max_length=1000)
+    book_category = models.CharField(max_length=1000, null=True)
 
 class BooksReview(models.Model):
     book = models.ForeignKey(Books, on_delete=models.CASCADE)
