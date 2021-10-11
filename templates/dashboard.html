@@ -16,6 +16,9 @@
                 <h3>Personal Infotmation</h3>
                 <form method="post" class="form-group my-3 personal_info_form">
                     {% csrf_token %}
+
+                    <input type="text" name="personal_info" hidden>
+
                     <input type="text" class="form-control" placeholder="First Name" value={{ f_name }} name="f_name">
                     <input type="text" class="form-control" placeholder="Last Name" value={{ l_name }} name="l_name">
                     <input type="email" class="form-control" placeholder="Email" value={{ email }} name="email"  disabled>

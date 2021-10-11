@@ -7,7 +7,6 @@ from django.core.mail import send_mail
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 
-
 # ========== Custom printing function for debugging ============
 from user_app.models import UserProfile
 
@@ -181,18 +180,21 @@ def reset_password(request):
 
 def  userDashboard(request):
     if request.user.is_authenticated:
-        if request.method == "GET":
-            first_name = request.user.first_name
-            last_name = request.user.last_name
-            email = request.user.email
+        # if request.method == "GET":
+        if request.method == "POST":
+            if 'personal_info' in request.POST:
+                println('Personal Info form')
 
-            context = {
-                "f_name": first_name,
-                "l_name": last_name,
-                "email": email,
-            }
+        first_name = request.user.first_name
+        last_name = request.user.last_name
+        email = request.user.email
 
-        constext = {}
+        context = {
+            "f_name": first_name,
+            "l_name": last_name,
+            "email": email,
+        }
+        
         return render(request, 'dashboard.html', context=context)
     else:
         messages.warning(request, "You Must Be Logged In")
