@@ -4,7 +4,8 @@ from django.db import models
 
 class Books(models.Model):
     uploader = models.ForeignKey(User, on_delete=models.CASCADE)
-    book = models.FileField(upload_to='pdf')
+    book = models.FileField(upload_to='pdf', blank=True)
+    book_thumbnail = models.ImageField(upload_to='pdf/thumbnails', null=True, blank=True)
     book_name = models.CharField(max_length=200, null=True)
     language = models.CharField(max_length=100, null=True)
     author_name = models.CharField(max_length=200, null=True)

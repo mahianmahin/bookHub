@@ -192,15 +192,21 @@ def  userDashboard(request):
                 book_description = request.POST.get('book_description')
                 category_value = request.POST.get('category_value')
                 book_pdf = request.POST.get('book_pdf')
+                book_pdf = request.FILES['book_pdf']
+                book_thumbnail = request.FILES['book_thumb']
+
+                println(type(book_pdf))
+                println(type(book_thumbnail))
 
                 books_ins = Books(
                     uploader = request.user,
                     book = book_pdf,
-                    # book_name = book_name,
-                    # author_name = author_name,
-                    # description = book_description,
-                    # book_category = category_value,
-                    # language = language 
+                    book_thumbnail = book_thumbnail,
+                    book_name = book_name,
+                    author_name = author_name,
+                    description = book_description,
+                    book_category = category_value,
+                    language = language,
                 )
 
                 books_ins.save()

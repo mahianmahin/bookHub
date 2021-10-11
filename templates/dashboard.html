@@ -14,7 +14,7 @@
 
             <div class="col-sm-7 my-3 profile_info">
                 <h3>Personal Infotmation</h3>
-                <form method="post" class="form-group my-3 personal_info_form">
+                <form method="post" class="form-group my-3 personal_info_form" enctype="multipart/form-data">
                     {% csrf_token %}
 
                     <input type="text" name="personal_info" hidden>
@@ -124,7 +124,7 @@
 
         <div class="row add_book_form my-3" id="add_book_section">
             <h4 class="my-3">Add A New Book</h4>
-            <form class="form-group book_upload_form" method="post">
+            <form class="form-group book_upload_form" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <input type="text" name="book_upload" hidden>
@@ -224,10 +224,14 @@
                 <input type="text" id="categories_field" name="category_value" hidden>
 
                 <h5 class="my-3">Select Book Pdf File</h5>
-                <input type="file" accept="pdf" class="btn btn-dark" name="book_pdf">
+                <input type="file" accept=".pdf,.doc" class="btn btn-dark" name="book_pdf">
+                
+                <h5 class="my-3">Select Book Thumbnail</h5>
+                <input type="file" accept="image/*" class="btn btn-dark" name="book_thumb">
+                
                 <br><br>
                 <input type="submit" value="Save" class="btn btn-success">
-                <button id="close_book_add" class="btn btn-danger">Cancel</button>
+                <span id="close_book_add" class="btn btn-danger">Cancel</span>
             </form>
         </div>
     </div>
