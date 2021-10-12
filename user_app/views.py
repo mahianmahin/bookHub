@@ -207,8 +207,6 @@ def userDashboard(request):
                 # update userProfile.
                 user_profile_ins.save()
 
-
-
             if 'book_upload' in request.POST:
                 book_name = request.POST.get('book_name')
                 author_name = request.POST.get('author_name')
