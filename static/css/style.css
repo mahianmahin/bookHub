@@ -609,7 +609,7 @@ input[type="number"]:focus,
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  opacity: 0.2;
+  opacity: 0.7;
 }
 
 
