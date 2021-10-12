@@ -11,11 +11,13 @@
           <div class="col-sm-4 px-3 py-3 d-flex flex-column">
             <div class="book_details">
               <h2 class="mb-3">Book details</h2>
-              <span class="details_name">Title:</span> <span class="details_detail">Chader Pahar</span> <br>
-              <span class="details_name">Author:</span> <span class="details_detail">Bibhutivushon Bondhopoddhay</span> <br>
-              <span class="details_name">Language:</span> <span class="details_detail">Bangla</span> <br>
-              <span class="details_name">Category:</span> <span class="details_detail">Adventure, Thriller</span> <br>
-              <span class="details_name">Description:</span> <span class="details_detail">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa suscipit possimus perspiciatis neque eos commodi est esse. Officiis itaque dolore illum, eos exercitationem ex et porro ad accusamus suscipit fugit est tempora delectus doloribus cumque ducimus. Esse exercitationem optio sapiente.</span>
+              <span class="details_name">Title :</span> <span class="details_detail">{{ book.book_name }}</span> <br>
+              <span class="details_name">Author :</span> <span class="details_detail">{{ book.author_name }}</span> <br>
+              <span class="details_name">Language :</span> <span class="details_detail">{{ book.language }}</span> <br>
+              <span class="details_name">Category :</span> <span class="details_detail">{{ book.book_category }}</span> <br>
+              <span class="details_name">Rating :</span> <span class="details_detail">{{ book.book_rating }}</span> <br>
+              <span class="details_name">Uploaded by :</span> <span class="details_detail">{{ book.uploader.first_name }} {{ book.uploader.last_name }}</span> <br>
+              <span class="details_name">Description :</span> <span class="details_detail">{{ book.description }}</span>
               
             </div>
 

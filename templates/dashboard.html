@@ -135,14 +135,14 @@
 
                 <input type="text" name="book_upload" hidden>
 
-                <input type="text" class="form-control" placeholder="Book Name" name="book_name">
-                <input type="text" class="form-control" placeholder="Author Name" name="author_name">
-                <select name="language" class="form-crontrol w-100 language_select">
+                <input type="text" class="form-control" placeholder="Book Name" name="book_name" required>
+                <input type="text" class="form-control" placeholder="Author Name" name="author_name" required>
+                <select name="language" class="form-crontrol w-100 language_select" required>
                     <option value="--" disabled selected>Select Book Language</option>
                     <option value="Bangla">Bangla</option>
                     <option value="English">English</option>
                 </select>
-                <textarea rows="3" class="form-control" placeholder="Book Description" name="book_description"></textarea>
+                <textarea rows="3" class="form-control" placeholder="Book Description" name="book_description" required></textarea>
                 <h5>Select Book Categories</h5>
                 <div class="categories d-flex flex-row flex-wrap">
                     <label>
@@ -230,7 +230,7 @@
                 <input type="text" id="categories_field" name="category_value" hidden>
 
                 <h5 class="my-3">Select Book Pdf File</h5>
-                <input type="file" accept=".pdf,.doc" class="btn btn-dark" name="book_pdf">
+                <input type="file" accept=".pdf,.doc" class="btn btn-dark" name="book_pdf" required>
                 
                 <h5 class="my-3">Select Book Thumbnail</h5>
                 <input type="file" accept="image/*" class="btn btn-dark" name="book_thumb">
