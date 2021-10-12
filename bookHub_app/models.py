@@ -12,7 +12,7 @@ class Books(models.Model):
     description = models.TextField()
     uploaded_time = models.DateTimeField(auto_now=True)
     book_category = models.CharField(max_length=1000, null=True)
-    book_rating = models.IntegerField(null=True, blank=True, default=0)
+    book_rating = models.FloatField(null=True, blank=True, default=0.0)
 
 class BooksReview(models.Model):
     book = models.ForeignKey(Books, on_delete=models.CASCADE)
