@@ -8,8 +8,10 @@
     <div class="container my-5">
         <!-- -----personal info row------ -->
         <div class="row personal_info">
-            <div class="col-sm-5 my-3 profile_pic_section d-flex justify-content-center align-items-center">
-                <img src={% static "images/user.jpg"%}>
+            <div class="col-sm-5 my-3 profile_pic_section d-flex flex-column justify-content-center align-items-center">
+                <img src={% static "images/user.jpg"%}> <br>
+                <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+                <small><i>Boi goes here</i></small>
             </div>
 
             <div class="col-sm-7 my-3 profile_info">
@@ -25,8 +27,12 @@
                     <input type="text" class="form-control" placeholder="address"  name="address">
                     <input type="text" class="form-control" placeholder="occupation"  name="occupation">
                     <input type="text" class="form-control" placeholder="Enter Your bio" name="bio">
-                    <p>Choose Profile Pic</p>
-                    <input type="file" accept="image/*" name="pro_pic" class="btn btn-dark mx-1 my-1">
+                    
+                    <input type="file" class="btn btn-dark mx-1 my-1" name="pro_pic" id="avatar_file" accept="image/*">
+                    <label for="avatar_file" class="btn btn-dark mx-1 my-1">Change Avatar</label>
+
+                    {% comment %} <input type="file" accept="image/*" name="pro_pic" class="btn btn-dark mx-1 my-1"> {% endcomment %}
+
                     <button type="submit" class="btn btn-success mx-1 my-1">Save Changes</button>
 
                 </form>
