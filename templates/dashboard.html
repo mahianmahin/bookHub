@@ -9,7 +9,11 @@
         <!-- -----personal info row------ -->
         <div class="row personal_info">
             <div class="col-sm-5 my-3 profile_pic_section d-flex flex-column justify-content-center align-items-center">
-                <img src={{ user_profile_ins.profile_pic.url }}> <br>
+                {% if user_profile_ins.profile_pic.url %}
+                    <img src={{ user_profile_ins.profile_pic.url }}> <br>
+                {% else %}
+                    <img src={% static '/images/user.jpg' %}> <br>
+                {% endif %}
                 <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
                 <small><i>Boi: {{ user_profile_ins.bio }}</i></small>
             </div>
@@ -233,7 +237,7 @@
                 <input type="file" accept=".pdf,.doc" class="btn btn-dark" name="book_pdf" required>
                 
                 <h5 class="my-3">Select Book Thumbnail</h5>
-                <input type="file" accept="image/*" class="btn btn-dark" name="book_thumb">
+                <input type="file" accept="image/*" class="btn btn-dark" name="book_thumb" required>
                 
                 <br><br>
                 <input type="submit" value="Save" class="btn btn-success">

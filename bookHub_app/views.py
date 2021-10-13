@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import HttpResponse, response
 from django.shortcuts import redirect, render
 # ========== Custom printing function for debugging ============
 from user_app.models import UserProfile
@@ -43,10 +44,32 @@ def books(request):
 
 def book_details(request, id, name):
     book = Books.objects.get(pk=id)
+    
+    # response = HttpResponse(book.book, content_type='application/pdf')
+    # response['Content-Disposition'] = 'filename=%s' % book.book
+    
+    if request.method == "POST":
+        review = request.POST.get('review')
+        rating_star = request.POST.get('rating_stars')
+
+        println(review)
+        println(rating_star)
+
+        review_ins = BooksReview(
+            book = book,
+            user = request.user,
+            review = review,
+            star = rating_star
+        )
+
+        review_ins.save()
+        messages.info(request, "Review saved")
+        
 
     context = {
         "book": book
     }
+
     return render(request, 'book-details.html', context=context)
 
 def blogs(request):
@@ -80,3 +103,4 @@ def about(request):
         "about": "active"
     }
     return render(request, 'about-us.html', context)
+

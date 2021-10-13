@@ -198,6 +198,7 @@ def userDashboard(request):
                     user_ins.last_name = l_name
                 # updating user info
                 user_ins.save()
+                messages.success(request, "Changes applied!")
 
                 # getting userProfile info
                 address = request.POST.get('address')
@@ -220,6 +221,7 @@ def userDashboard(request):
                 else:
                     user_profile_ins.profile_pic = user_profile_ins.profile_pic
                 user_profile_ins.save()
+                messages.success(request, "Chenges applied!")
 
             if 'book_upload' in request.POST:
                 book_name = request.POST.get('book_name')
@@ -246,6 +248,7 @@ def userDashboard(request):
                 )
 
                 books_ins.save()
+                messages.success(request, "Book uploaded successfully!")
 
                 println("Data saved")
 
