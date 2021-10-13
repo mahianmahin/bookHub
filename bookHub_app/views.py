@@ -51,6 +51,12 @@ def rating_updater(id, book, rating):
 
     return rating
 
+def delete_book(request, id):
+    book_ins = Books.objects.get(pk=id)
+    book_ins.delete()
+
+    return redirect('/user-dashboard')
+
 def book_details(request, id, name):
     book = Books.objects.get(pk=id)
     reviews = BooksReview.objects.filter(book=book)
@@ -97,7 +103,8 @@ def book_details(request, id, name):
     context = {
         "book": book,
         "reviews": reviews,
-        "rating": rating
+        "rating": rating,
+        "review_count": len(reviews)
     }
 
     return render(request, 'book-details.html', context=context)

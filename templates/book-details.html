@@ -15,7 +15,7 @@
               <span class="details_name">Author :</span> <span class="details_detail">{{ book.author_name }}</span> <br>
               <span class="details_name">Language :</span> <span class="details_detail">{{ book.language }}</span> <br>
               <span class="details_name">Category :</span> <span class="details_detail">{{ book.book_category }}</span> <br>
-              <span class="details_name">Rating :</span> <span class="details_detail">{{ rating }}</span> <br>
+              <span class="details_name">Rating :</span> <span class="details_detail">{{ rating }} ({{ review_count }})</span> <br>
               <span class="details_name">Uploaded by :</span> <span class="details_detail">{{ book.uploader.first_name }} {{ book.uploader.last_name }}</span> <br>
               <span class="details_name">Description :</span> <span class="details_detail">{{ book.description }}</span>
               
@@ -64,7 +64,7 @@
                   </div>
 
                   <div class="review_description my-2">
-                    {{ review.review }} {{ review.user }} {{ review.star }}
+                    {{ review.review }}
                   </div>
                 </div>
               </div>

@@ -11,5 +11,6 @@ urlpatterns = [
     path('my_blog/', my_blog, name="my_blog"),
     path('single_blog/', single_blog, name="single_blog"),
     path('contact/', contact, name="contact"),
-    path('about/', about, name="about")
+    path('about/', about, name="about"),
+    path('delete/<int:id>/', delete_book, name="delete"),
 ]

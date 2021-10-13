@@ -180,6 +180,9 @@ def reset_password(request):
 
 def userDashboard(request):
     if request.user.is_authenticated:
+        book_review = BooksReview.objects.filter(user=request.user)
+        books = Books.objects.filter(uploader=request.user)
+
         global user_profile_ins
         user_profile_ins = UserProfile.objects.filter(user_id=request.user.id).first()
         if request.method == "POST":
@@ -253,7 +256,9 @@ def userDashboard(request):
                 println("Data saved")
 
         context = {
-            'user_profile_ins': user_profile_ins
+            'user_profile_ins': user_profile_ins,
+            'book_reviews': book_review,
+            'books': books
         }
 
         return render(request, 'dashboard.html', context=context)
