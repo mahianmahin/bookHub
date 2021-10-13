@@ -15,7 +15,8 @@
                     <img src={% static '/images/user.jpg' %}> <br>
                 {% endif %}
                 <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
-                <small><i>Boi: {{ user_profile_ins.bio }}</i></small>
+                <h6>{{ request.user.email }}</h6>
+                <small><i>{{ user_profile_ins.bio }}</i></small>
             </div>
 
             <div class="col-sm-7 my-3 profile_info">

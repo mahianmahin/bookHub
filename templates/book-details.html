@@ -15,7 +15,7 @@
               <span class="details_name">Author :</span> <span class="details_detail">{{ book.author_name }}</span> <br>
               <span class="details_name">Language :</span> <span class="details_detail">{{ book.language }}</span> <br>
               <span class="details_name">Category :</span> <span class="details_detail">{{ book.book_category }}</span> <br>
-              <span class="details_name">Rating :</span> <span class="details_detail">{{ book.book_rating }}</span> <br>
+              <span class="details_name">Rating :</span> <span class="details_detail">{{ rating }}</span> <br>
               <span class="details_name">Uploaded by :</span> <span class="details_detail">{{ book.uploader.first_name }} {{ book.uploader.last_name }}</span> <br>
               <span class="details_name">Description :</span> <span class="details_detail">{{ book.description }}</span>
               
@@ -40,57 +40,36 @@
 
             <div class="all_reviews px-2 py-2">
 
+            {% for review in reviews %}
               <!-- ---------- Review box ---------- -->
               <div class="review_box shadow px-2 py-2 my-2">
                 
                 <div class="d-flex flex-column">
                   <div class="d-flex flex-row">
-                    <img src={% static "/images/user.jpg" %}>
+                    {% if review.user.profile.profile_pic %}
+                      <img src={{ review.user.profile.profile_pic.url }}>
+                    {% else %}
+                      <img src={% static "/images/user.jpg" %}>
+                    {% endif %}
 
                     <div class="d-flex flex-column mx-3">
-                      <span class="user_name"><b>Mahian Mahin</b></span>
+                      <span class="user_name"><b>{{ review.user.first_name }} {{ review.user.last_name }}</b></span>
 
                       <div class="stars d-flex flex-row">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        {% for star in "x"|ljust:review.star %}
+                          <i class="fas fa-star"></i>
+                        {% endfor %}
                       </div>
                     </div>
                   </div>
 
                   <div class="review_description my-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, impedit.
+                    {{ review.review }} {{ review.user }} {{ review.star }}
                   </div>
                 </div>
               </div>
               <!-- ---------- Review box ---------- -->
-              
-              <!-- ---------- Review box ---------- -->
-              <div class="review_box shadow px-2 py-2 my-2">
-                
-                <div class="d-flex flex-column">
-                  <div class="d-flex flex-row">
-                    <img src={% static "./images/user.jpg" %}>
-
-                    <div class="d-flex flex-column mx-3">
-                      <span class="user_name"><b>Mahian Mahin</b></span>
-
-                      <div class="stars d-flex flex-row">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="review_description my-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, impedit.
-                  </div>
-                </div>
-              </div>
-              <!-- ---------- Review box ---------- -->
+            {% endfor %}
 
             </div>
           </div>
