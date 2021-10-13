@@ -180,32 +180,41 @@ def reset_password(request):
 
 def userDashboard(request):
     if request.user.is_authenticated:
+        user_profile_ins = UserProfile.objects.filter(user_id=request.user.id).first()
         if request.method == "POST":
             if 'personal_info' in request.POST:
                 println('Personal Info form')
                 f_name = request.POST.get('f_name')
                 l_name = request.POST.get('l_name')
                 user_ins = User.objects.get(id=request.user.id)
-                user_ins.first_name = f_name
-                user_ins.last_name = l_name
+                if (f_name == ""):
+                    print("true")
+                    user_ins.first_name = user_ins.first_name
+                else:
+                    user_ins.first_name = f_name
+                if (l_name == ""):
+                    user_ins.last_name = user_ins.last_name
+                else:
+                    user_ins.last_name = l_name
                 # updating user info
                 user_ins.save()
-                # getting userProfile info
 
+                # getting userProfile info
                 address = request.POST.get('address')
                 occupation = request.POST.get('occupation')
                 bio = request.POST.get('bio')
-                pro_pic = request.FILES['pro_pic']
+                # pro_pic = request.FILES['pro_pic']
                 # user Profile instance
-                user_profile_ins = UserProfile.objects.filter(user_id=request.user.id).first()
+                user_profile_ins_update = UserProfile.objects.filter(user_id=request.user.id).update(
+                    occupation=occupation, bio=bio, address=address)
 
-                user_profile_ins.occupation = occupation
-                user_profile_ins.address = address
-                user_profile_ins.bio = bio
-                if (pro_pic):
-                    user_profile_ins.profile_pic = pro_pic
+                # user_profile_ins.occupation = occupation
+                # user_profile_ins.address = address
+                # user_profile_ins.bio = bio
+                # if (pro_pic):
+                #     user_profile_ins.profile_pic = pro_pic
                 # update userProfile.
-                user_profile_ins.save()
+                # user_profile_ins.save()
 
             if 'book_upload' in request.POST:
                 book_name = request.POST.get('book_name')
@@ -236,7 +245,7 @@ def userDashboard(request):
                 println("Data saved")
 
         context = {
-
+            'user_profile_ins': user_profile_ins
         }
 
         return render(request, 'dashboard.html', context=context)

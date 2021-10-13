@@ -24,9 +24,9 @@
                     <input type="text" class="form-control" placeholder="First Name" value={{ request.user.first_name }} name="f_name">
                     <input type="text" class="form-control" placeholder="Last Name" value={{ request.user.last_name }} name="l_name">
                     <input type="email" class="form-control" placeholder="Email" value={{ request.user.email }} name="email"  disabled>
-                    <input type="text" class="form-control" placeholder="address"  name="address">
-                    <input type="text" class="form-control" placeholder="occupation"  name="occupation">
-                    <input type="text" class="form-control" placeholder="Enter Your bio" name="bio">
+                    <input type="text" class="form-control" placeholder="address" value={{ user_profile_ins.address }} name="address">
+                    <input type="text" class="form-control" placeholder="occupation" value={{ user_profile_ins.occupation }} name="occupation">
+                    <input type="text" class="form-control" placeholder="Enter Your bio" value={{ user_profile_ins.bio }} name="bio">
                     
                     <input type="file" class="btn btn-dark mx-1 my-1" name="pro_pic" id="avatar_file" accept="image/*">
                     <label for="avatar_file" class="btn btn-dark mx-1 my-1">Change Avatar</label>
