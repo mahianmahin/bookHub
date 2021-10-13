@@ -23,8 +23,9 @@
 
             <div class="reviews my-3">
               <h2 id="type">Reviews</h2>
-              <form class="form-group w-100">
-                <textarea class="form-control" rows="2" placeholder="Leave a review of this book here"></textarea>
+              <form class="form-group w-100" method="POST">
+              {% csrf_token %}
+                <textarea class="form-control" name="review" rows="2" placeholder="Leave a review of this book here"></textarea>
                 <div class="stars_review my-2 d-flex flex-row">
                   <div class="mx-1" id="star_1"><i class="fa-star fas"></i></div>
                   <div class="mx-1" id="star_2"><i class="fa-star fas"></i></div>
@@ -32,7 +33,7 @@
                   <div class="mx-1" id="star_4"><i class="fa-star fas"></i></div>
                   <div class="mx-1" id="star_5"><i class="fa-star fas"></i></div>
                 </div>
-                <input type="hidden" id="rating_stars_hidden" value="" name="rating_stars">
+                <input type="number" id="rating_stars_hidden" value="" name="rating_stars" hidden>
                 <button type="submit" class="btn btn-dark my-2">Save</button>
               </form>
             </div>
@@ -95,7 +96,9 @@
           </div>
 
           <div class="col-sm-8">
-            <iframe src={% static '/pdf/book.pdf#toolbar=0' %} type="application/pdf" height="800px" width="100%" class="pdf_box"></iframe>
+            {% comment %} <iframe src={{ book.book.url }} type="application/pdf" height="800px" width="100%" class="pdf_box"></iframe> {% endcomment %}
+            {% comment %} <iframe src='/media/pdf/Python_2nd_part.pdf#toolbar=0' type="application/pdf" height="800px" width="100%" class="pdf_box"></iframe> {% endcomment %}
+            {% comment %} <iframe src={{ book.book.url }} type="application/pdf" height="800px" width="100%" class="pdf_box"></iframe> {% endcomment %}
           </div>
         </div>
         </div>
@@ -103,4 +106,4 @@
 
 
 
-{% endblock %}
+{% endblock content %}
