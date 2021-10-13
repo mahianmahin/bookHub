@@ -9,9 +9,9 @@
         <!-- -----personal info row------ -->
         <div class="row personal_info">
             <div class="col-sm-5 my-3 profile_pic_section d-flex flex-column justify-content-center align-items-center">
-                <img src={% static "images/user.jpg"%}> <br>
+                <img src={{ user_profile_ins.profile_pic.url }}> <br>
                 <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
-                <small><i>Boi goes here</i></small>
+                <small><i>Boi: {{ user_profile_ins.bio }}</i></small>
             </div>
 
             <div class="col-sm-7 my-3 profile_info">
@@ -28,7 +28,7 @@
                     <input type="text" class="form-control" placeholder="occupation" value={{ user_profile_ins.occupation }} name="occupation">
                     <input type="text" class="form-control" placeholder="Enter Your bio" value={{ user_profile_ins.bio }} name="bio">
                     
-                    <input type="file" class="btn btn-dark mx-1 my-1" name="pro_pic" id="avatar_file" accept="image/*">
+                    <input type="file" class="btn btn-dark mx-1 my-1" name="image" id="avatar_file" accept="image/*">
                     <label for="avatar_file" class="btn btn-dark mx-1 my-1">Change Avatar</label>
 
                     {% comment %} <input type="file" accept="image/*" name="pro_pic" class="btn btn-dark mx-1 my-1"> {% endcomment %}
