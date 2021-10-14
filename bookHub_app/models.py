@@ -34,3 +34,7 @@ class Blogs(models.Model):
 
     def __str__(self):
         return self.title
+
+class Quote(models.Model):
+    quote = models.TextField(max_length=115)
+    source = models.CharField(max_length=20)

@@ -19,7 +19,7 @@ try {
     var element = document.getElementById('counter_section');
     var position = element.getBoundingClientRect();
     var yAxis = position.top;
-} catch(error) {
+} catch (error) {
     // pass
 }
 
@@ -27,8 +27,8 @@ yAxis = Math.floor(yAxis);
 
 const Counter = function(id, count, speed) {
     var counter = 0;
-    
-    for(var i = 0; i < count; i++) {
+
+    for (var i = 0; i < count; i++) {
         (function(i) {
             setTimeout(
                 function() {
@@ -49,14 +49,14 @@ var height = yAxis - 500;
 window.addEventListener('scroll', () => {
     scrolled = window.scrollY;
     scrolled = Math.floor(scrolled);
-    
+
     if (scrolled >= height && scrolled <= yAxis) {
         if (counted == false) {
             // console.log('Beep Beep');
-            Counter('books_count', 200, 30);
-            Counter('blogs_count', 142, 30);
-            Counter('readers_count', 4522, 1);
-            Counter('likes_count', 65452, .1);
+            Counter('books_count', books_count, 30);
+            Counter('blogs_count', blogs_count, 30);
+            Counter('readers_count', readers_count, 1);
+            Counter('likes_count', reviews_count, .1);
             counted = true;
         }
     }
@@ -72,47 +72,47 @@ try {
         document.getElementById("star_3").style.color = "black";
         document.getElementById("star_4").style.color = "black";
         document.getElementById("star_5").style.color = "black";
-    
+
         document.getElementById('rating_stars_hidden').value = "1";
     });
-    
+
     document.getElementById("star_2").addEventListener('click', () => {
         document.getElementById("star_1").style.color = "#80D5F9";
         document.getElementById("star_2").style.color = "#80D5F9";
         document.getElementById("star_3").style.color = "black";
         document.getElementById("star_4").style.color = "black";
         document.getElementById("star_5").style.color = "black";
-    
+
         document.getElementById('rating_stars_hidden').value = "2";
     });
-    
+
     document.getElementById("star_3").addEventListener('click', () => {
         document.getElementById("star_1").style.color = "#80D5F9";
         document.getElementById("star_2").style.color = "#80D5F9";
         document.getElementById("star_3").style.color = "#80D5F9";
         document.getElementById("star_4").style.color = "black";
         document.getElementById("star_5").style.color = "black";
-    
+
         document.getElementById('rating_stars_hidden').value = "3";
     });
-    
+
     document.getElementById("star_4").addEventListener('click', () => {
         document.getElementById("star_1").style.color = "#80D5F9";
         document.getElementById("star_2").style.color = "#80D5F9";
         document.getElementById("star_3").style.color = "#80D5F9";
         document.getElementById("star_4").style.color = "#80D5F9";
         document.getElementById("star_5").style.color = "black";
-    
+
         document.getElementById('rating_stars_hidden').value = "4";
     });
-    
+
     document.getElementById("star_5").addEventListener('click', () => {
         document.getElementById("star_1").style.color = "#80D5F9";
         document.getElementById("star_2").style.color = "#80D5F9";
         document.getElementById("star_3").style.color = "#80D5F9";
         document.getElementById("star_4").style.color = "#80D5F9";
         document.getElementById("star_5").style.color = "#80D5F9";
-    
+
         document.getElementById('rating_stars_hidden').value = "5";
     });
 } catch (error) {
@@ -130,5 +130,3 @@ try {
 } catch (error) {
     // pass
 }
-
-

@@ -29,7 +29,7 @@
                         <p><b>Published Date:</b> <small>{{ blog_ins.created_time }}</small></p>
                     </div>
                     <div class="others-blog">
-                        <h6>Others Blog</h6>
+                        <h6>Other Blogs</h6>
                         {% for blg in author_blogs %}
                         <p><a href={% url 'single_blog' id=blg.id title=blg.title %}>{{ blg.title }}</a></p>
                         {% endfor %}

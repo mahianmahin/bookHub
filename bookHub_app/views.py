@@ -16,8 +16,22 @@ def println(text):
 
 # Create your views here.
 def home(request):
+    reviews = BooksReview.objects.all()
+    quotes = Quote.objects.all()
+
+    books = Books.objects.all()
+    blogs = Blogs.objects.all()
+    users = UserProfile.objects.all()
+
     context = {
-        "home": "active"
+        "home": "active",
+        "reviews": reviews,
+        "quotes": quotes,
+
+        "books_len": len(books),
+        "blogs_len": len(blogs),
+        "users_len": len(users),
+        "reviews_len": len(reviews)
     }
     return render(request, 'index.html', context)
 
