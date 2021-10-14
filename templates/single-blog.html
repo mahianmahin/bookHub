@@ -30,10 +30,9 @@
                     </div>
                     <div class="others-blog">
                         <h6>Others Blog</h6>
-                        <p><a href="">blog1</a></p>
-                        <p><a href="">blog2</a></p>
-                        <p><a href="">blog3</a></p>
-                        <p><a href="">blog4</a></p>
+                        {% for blg in author_blogs %}
+                        <p><a href={% url 'single_blog' id=blg.id title=blg.title %}>{{ blg.title }}</a></p>
+                        {% endfor %}
 
                     </div>
                 </div>

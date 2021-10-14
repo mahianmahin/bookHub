@@ -151,9 +151,13 @@ def my_blog(request):
 
 def single_blog(request,id, title):
     blog_ins = Blogs.objects.get(id=id)
-    print("blog: ", blog_ins)
+    blog_author = blog_ins.user_id
+
+    author_blogs = Blogs.objects.filter(user_id=blog_author)
+    print("blog_author: ", blog_author)
     context = {
-        "blog_ins": blog_ins
+        "blog_ins": blog_ins,
+        "author_blogs": author_blogs
     }
     return render(request, 'single-blog.html', context)
 

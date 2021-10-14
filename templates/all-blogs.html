@@ -29,7 +29,9 @@
             <div class="card-footer bg-white d-flex justify-content-between align-items-center">
               <small class='text-info'>{{ blog.created_time }}</small>
               <div>
-                <input type="submit" value="Details" class="btn details-btn">
+                <a href={% url 'single_blog' id=blog.id title=blog.title %}>
+                    <input value="Details" class="btn details-btn">
+                </a>
               </div>
             </div>
           </div>
