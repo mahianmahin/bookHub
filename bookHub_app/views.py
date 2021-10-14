@@ -37,6 +37,7 @@ def home(request):
 
 def books(request):
     books = Books.objects.all()
+    book_categories = BookCategories.objects.all()
 
     category_dict = {}
 
@@ -51,7 +52,8 @@ def books(request):
     context = {
         "books": "active",
         "all_books": books,
-        "category": category_dict
+        "category": category_dict,
+        "book_categories": book_categories
     }
 
     return render(request, 'books.html', context=context)
@@ -194,9 +196,44 @@ def search(request):
             searched = request.POST.get('searched')
 
             books = Books.objects.filter(book_name__contains=searched) | Books.objects.filter(author_name__contains=searched)
+
+            book_categories = BookCategories.objects.all()
+
+            category_dict = {}
+
+            for book in books:
+                item = book.book_category
+                category = item.split(',')
+
+                category_dict[book.id] = category
             
     context = {
         "searched": searched,
-        "all_books": books
+        "all_books": books,
+        "category": category_dict,
     }
     return render(request, 'search.html', context=context)
+
+def filter_books(request):
+
+    if request.method == "POST":
+        searched_category = request.POST.get('category')
+
+        books = Books.objects.filter(book_category__contains=searched_category)
+        book_categories = BookCategories.objects.all()
+
+        category_dict = {}
+
+        for book in books:
+            item = book.book_category
+            category = item.split(',')
+
+            category_dict[book.id] = category
+
+    context = {
+        'searched_category': searched_category,
+        "category": category_dict,
+        'book_categories': book_categories,
+        'all_books': books
+    }
+    return render(request, 'filter.html', context=context)

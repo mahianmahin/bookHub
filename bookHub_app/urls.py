@@ -14,4 +14,5 @@ urlpatterns = [
     path('about/', about, name="about"),
     path('delete/<int:id>/', delete_book, name="delete"),
     path('search/', search, name="search"),
+    path('filter/', filter_books, name="filter"),
 ]

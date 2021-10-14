@@ -38,3 +38,6 @@ class Blogs(models.Model):
 class Quote(models.Model):
     quote = models.TextField(max_length=115)
     source = models.CharField(max_length=20)
+
+class BookCategories(models.Model):
+    category = models.CharField(max_length=20)

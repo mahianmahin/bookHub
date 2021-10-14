@@ -14,3 +14,7 @@ class BookReviewAdmin(admin.ModelAdmin):
 @admin.register(Quote)
 class QuoteAdmin(admin.ModelAdmin):
     list_display = ['id', 'source']
+
+@admin.register(BookCategories)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'category']
