@@ -149,8 +149,13 @@ def my_blog(request):
         return redirect('/login')
 
 
-def single_blog(request):
-    return render(request, 'single-blog.html')
+def single_blog(request,id, title):
+    blog_ins = Blogs.objects.get(id=id)
+    print("blog: ", blog_ins)
+    context = {
+        "blog_ins": blog_ins
+    }
+    return render(request, 'single-blog.html', context)
 
 
 def contact(request):

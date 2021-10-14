@@ -4,82 +4,87 @@
 {% block title %} {{ request.user.first_name }} {{ request.user.last_name }}'s Blogs | BookHub {% endblock %}
 
 {% block content %}
-  <!-- blog start -->
+    <!-- blog start -->
 
-  <section class="blog-section">
+<section class="blog-section">
     <div class="container">
-      <div class="row my-5">
-        <div class="col-lg-6">
-          <h1 class="text-center heading-border">Add Your Blog</h1>
-          <div class="p-2">
-            <form method="post" class="form-group" enctype="multipart/form-data">
-                {% csrf_token %}
-              <input class="form-control " name="title" type="text" placeholder="Enter Your Blog Title" aria-label=" example" required>
-              <textarea class="form-control" name="description" id="" cols="30" placeholder="Enter Blog Details" rows="4" required></textarea>
-              <input type="file"  accept="image/*" class="form-control btn btn-dark w-75" name="img" required>
-              <br><br>
-              <input type="submit" value="Save" class="btn btn-success">
-              <button id="close_book_add" class="btn btn-danger">Cancel</button>
-            </form>
-          </div>
+        <div class="row my-5">
+            <div class="col-lg-6">
+                <h1 class="text-center heading-border">Add Your Blog</h1>
+                <div class="p-2">
+                    <form method="post" class="form-group" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input class="form-control " name="title" type="text" placeholder="Enter Your Blog Title"
+                               aria-label=" example" required>
+                        <textarea class="form-control" name="description" id="" cols="30"
+                                  placeholder="Enter Blog Details" rows="4" required></textarea>
+                        <input type="file" accept="image/*" class="form-control btn btn-dark w-75" name="img"
+                               required>
+                        <br><br>
+                        <input type="submit" value="Save" class="btn btn-success">
+                        <button id="close_book_add" class="btn btn-danger">Cancel</button>
+                    </form>
+                </div>
 
-          
-        </div>
-        <div class="col-lg-6 my-blogs all_reviews">
-          <h1 class="text-center heading-border">My Blogs</h1>
 
-            {% for blog in my_blogs %}
-          <div class="card my-3 shadow">
-            <img src={{ blog.thumbnail.url }} class='img-fluid'>
-            <div class="card-body">
-              <p class="text-center fw-bolder">{{ blog.title}} </p>
-              <p class=""> {{ blog.description }} </p>
             </div>
-            <div class="card-footer bg-white d-flex justify-content-between align-items-center">
-              <small class='text-info'>{{ blog.created_time }}</small>
-              <div>
-                <input type="submit" value="Details" class="btn details-btn">
-                <input type="submit" value="Update" class="btn update-btn">
-                <input type="submit" value="Delete" class="btn delete-btn">
-              </div>
+            <div class="col-lg-6 my-blogs all_reviews">
+                <h1 class="text-center heading-border">My Blogs</h1>
+
+                {% for blog in my_blogs %}
+                    <div class="card my-3 shadow">
+                        <img src={{ blog.thumbnail.url }} class='img-fluid'>
+                        <div class="card-body">
+                            <p class="text-center fw-bolder">{{ blog.title }} </p>
+                            <p class=""> {{ blog.description }} </p>
+                        </div>
+                        <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                            <small class='text-info'>{{ blog.created_time }}</small>
+                            <div>
+                                <a href={% url 'single_blog' id=blog.id title=blog.title %}> <input
+                                        type="submit" value="Details" class="btn details-btn">
+                                </a>
+                                <input type="submit" value="Update" class="btn update-btn">
+                                <input type="submit" value="Delete" class="btn delete-btn">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {#          <div class="card my-3 shadow">#}
+                {#            <img src="images/blog.jpg" class='img-fluid' alt="">#}
+                {#            <div class="card-body">#}
+                {#              <p class="text-center fw-bolder">Here is my first blog. </p>#}
+                {#              <p class="">With supporting text below as a natural lead-in to additional content.... </p>#}
+                {#            </div>#}
+                {#            <div class="card-footer bg-white d-flex justify-content-between align-items-center">#}
+                {#              <small class='text-info'>23 March 2021</small>#}
+                {#              <div>#}
+                {#                <input type="submit" value="Details" class="btn details-btn">#}
+                {#                <input type="submit" value="Update" class="btn update-btn">#}
+                {#                <input type="submit" value="Delete" class="btn delete-btn">#}
+                {#              </div>#}
+                {#            </div>#}
+                {#          </div>#}
+                {#          <div class="card my-3 shadow">#}
+                {#            <img src="images/blog.jpg" class='img-fluid' alt="">#}
+                {#            <div class="card-body">#}
+                {#              <p class="text-center fw-bolder">Here is my first blog. </p>#}
+                {#              <p class="">With supporting text below as a natural lead-in to additional content.... </p>#}
+                {#            </div>#}
+                {#            <div class="card-footer bg-white d-flex justify-content-between align-items-center">#}
+                {#              <small class='text-info'>23 March 2021</small>#}
+                {#              <div>#}
+                {#                <input type="submit" value="Details" class="btn details-btn">#}
+                {#                <input type="submit" value="Update" class="btn update-btn">#}
+                {#                <input type="submit" value="Delete" class="btn delete-btn">#}
+                {#              </div>#}
+                {#            </div>#}
+                {#          </div>#}
+
             </div>
-          </div>
-            {% endfor %}
-{#          <div class="card my-3 shadow">#}
-{#            <img src="images/blog.jpg" class='img-fluid' alt="">#}
-{#            <div class="card-body">#}
-{#              <p class="text-center fw-bolder">Here is my first blog. </p>#}
-{#              <p class="">With supporting text below as a natural lead-in to additional content.... </p>#}
-{#            </div>#}
-{#            <div class="card-footer bg-white d-flex justify-content-between align-items-center">#}
-{#              <small class='text-info'>23 March 2021</small>#}
-{#              <div>#}
-{#                <input type="submit" value="Details" class="btn details-btn">#}
-{#                <input type="submit" value="Update" class="btn update-btn">#}
-{#                <input type="submit" value="Delete" class="btn delete-btn">#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#          <div class="card my-3 shadow">#}
-{#            <img src="images/blog.jpg" class='img-fluid' alt="">#}
-{#            <div class="card-body">#}
-{#              <p class="text-center fw-bolder">Here is my first blog. </p>#}
-{#              <p class="">With supporting text below as a natural lead-in to additional content.... </p>#}
-{#            </div>#}
-{#            <div class="card-footer bg-white d-flex justify-content-between align-items-center">#}
-{#              <small class='text-info'>23 March 2021</small>#}
-{#              <div>#}
-{#                <input type="submit" value="Details" class="btn details-btn">#}
-{#                <input type="submit" value="Update" class="btn update-btn">#}
-{#                <input type="submit" value="Delete" class="btn delete-btn">#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-              
         </div>
-      </div>
     </div>
-  </section>
-  <!-- blog end -->
+</section>
+    <!-- blog end -->
 
 {% endblock %}
