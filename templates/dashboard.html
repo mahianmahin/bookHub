@@ -114,86 +114,12 @@
                 <textarea rows="3" class="form-control" placeholder="Book Description" name="book_description" required></textarea>
                 <h5>Select Book Categories</h5>
                 <div class="categories d-flex flex-row flex-wrap">
+                    {% for category in categories %}
                     <label>
-                        <input type="checkbox" class="checkbox" value="Action and Adventure" id="checkbox">
-                        <span>Action and adventure</span>
+                        <input type="checkbox" class="checkbox" value="{{ category.category }}" id="checkbox">
+                        <span>{{ category.category }}</span>
                     </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Art/Architecture" id="checkbox">
-                        <span>Art/architecture</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="History" id="checkbox">
-                        <span>History</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Biography" id="checkbox">
-                        <span>Biography</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Comic Book" id="checkbox">
-                        <span>Comic book</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Crime" id="checkbox">
-                        <span>Crime</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Drama" id="checkbox">
-                        <span>Drama</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Health/Fitness" id="checkbox">
-                        <span>Health/fitness</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Humor" id="checkbox">
-                        <span>Humor</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Horror" id="checkbox">
-                        <span>Horror</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Journal" id="checkbox">
-                        <span>Journal</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Romance" id="checkbox">
-                        <span>Romance</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Philosophy" id="checkbox">
-                        <span>Philosophy</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Prayer" id="checkbox">
-                        <span>Prayer</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Islamic" id="checkbox">
-                        <span>Islamic</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Thriller" id="checkbox">
-                        <span>Thriller</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Crime" id="checkbox">
-                        <span>Crime</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Science" id="checkbox">
-                        <span>Science</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Suspense" id="checkbox">
-                        <span>Suspense</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" class="checkbox" value="Travel" id="checkbox">
-                        <span>Travel</span>
-                    </label>
+                    {% endfor %}
                 </div>
 
                 <input type="text" id="categories_field" name="category_value" hidden>

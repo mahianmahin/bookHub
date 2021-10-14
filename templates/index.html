@@ -145,38 +145,17 @@
     <section id="quotes-section">
       <div class="container my-5 py-5">
         <div class="row">
+          {% for quote in quotes %}
           <div class="col-lg-3 col-md-3 col-sm-6 my-2">
               <div class="box">
                 <div class="box-content">
-                  <p class='text-center'>&quot; Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores delectus, quasi asperiores perferendis minus aut. &quot;</p>
-                  <h4 class="text-end">-internet</h4>
+                  <p class='text-center'>&quot; {{ quote.quote }} &quot;</p>
+                  <h4 class="text-end">-{{ quote.source }}</h4>
                 </div>
               </div>
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 my-2">
-            <div class="box">
-              <div class="box-content">
-                <p class='text-center'> &quot;Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores delectus, quasi asperiores perferendis minus aut. &quot;</p>
-              <h4 class="text-end">-internet</h4>
-              </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 my-2">
-          <div class="box">
-            <div class="box-content">
-              <p class='text-center'> &quot; Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores delectus, quasi asperiores perferendis minus aut.&quot; </p>
-            <h4 class="text-end">-internet</h4>
-            </div>
-          </div>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-6 my-2">
-        <div class="box">
-          <div class="box-content">
-            <p class='text-center'>&quot; Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores delectus, quasi asperiores perferendis minus aut.&quot; </p>
-          <h4 class="text-end">-internet</h4>
-          </div>
-        </div>
-    </div>
+          {% endfor %}
+          
         </div>
       </div>
     </section>
@@ -189,69 +168,30 @@
           <div class="review-section">
             <div class="swiper-container mySwiper">
               <div class="swiper-wrapper">
+
+              {% for review in reviews %}
+              {% if review.review %}
                 <div class="swiper-slide">
                   <div class="review-box">
                     <div class="review-content">
                       <div class="user-details">
                         <div class="imgBx">
-                          <img class="img-fluid" src="images/user.jpg" alt="">
+                          <img class="img-fluid" src={{ review.user.profile.profile_pic.url }}>
                         </div>
-                        <h5>user1</h5>
+                        <h5>{{ review.user.first_name }} {{ review.user.last_name }}</h5>
                       </div>
                       <br>
-                      <p>&quot;Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore quisquam rerum, commodi saepe ullam corrupti corporis inventore nihil earum molestias.&quot;</p>
+                      <p>&quot;{{ review.review }}&quot;</p>
                       <div class="text-center">
+                      {% for star in "x"|ljust:review.star %}
                         <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                      {% endfor %}
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="swiper-slide">
-                  <div class="review-box">
-                    <div class="review-content">
-                      <div class="user-details">
-                        <div class="imgBx">
-                          <img class="img-fluid" src="images/user.jpg" alt="">
-                        </div>
-                        <h5>user1</h5>
-                      </div>
-                      <br>
-                      <p>&quot;Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore quisquam rerum, commodi saepe ullam corrupti corporis inventore nihil earum molestias.&quot;</p>
-                      <div class="text-center">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="review-box">
-                    <div class="review-content">
-                      <div class="user-details">
-                        <div class="imgBx">
-                          <img class="img-fluid" src="images/user.jpg" alt="">
-                        </div>
-                        <h5>user1</h5>
-                      </div>
-                      <br>
-                      <p>&quot;Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore quisquam rerum, commodi saepe ullam corrupti corporis inventore nihil earum molestias.&quot;</p>
-                      <div class="text-center">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              {% endif %}
+              {% endfor %}
                 
               </div>
               <div class="swiper-pagination"></div>
@@ -291,7 +231,7 @@
           <div class="counting-card shadow-lg d-flex flex-column justify-content-center align-items-center">
             <div class="number" id="likes_count">0</div>
             <div class="name">
-              Likes
+              Reviews
             </div>
           </div>
           <!-- counting card body -->
@@ -341,5 +281,12 @@
       </div>
     </section>
     <!-- Team section end -->
+
+    <script>
+      var books_count = {{ books_len }}
+      var blogs_count = {{ blogs_len }}
+      var readers_count = {{ users_len }}
+      var reviews_count = {{ reviews_len }}
+    </script>
 
 {% endblock %}

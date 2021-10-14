@@ -1,29 +1,43 @@
 from django.contrib import messages
 from django.http import HttpResponse, response
 from django.shortcuts import redirect, render
-# ========== Custom printing function for debugging ============
 from user_app.models import UserProfile
 
 from .models import *
 
+# ========== Custom printing function for debugging ============
 
 def println(text):
     print("\n====================\n", text, "\n====================\n")
-
 
 # ========== Custom printing function for debugging ============
 
 
 # Create your views here.
 def home(request):
+    reviews = BooksReview.objects.all()
+    quotes = Quote.objects.all()
+
+    books = Books.objects.all()
+    blogs = Blogs.objects.all()
+    users = UserProfile.objects.all()
+
     context = {
-        "home": "active"
+        "home": "active",
+        "reviews": reviews,
+        "quotes": quotes,
+
+        "books_len": len(books),
+        "blogs_len": len(blogs),
+        "users_len": len(users),
+        "reviews_len": len(reviews)
     }
     return render(request, 'index.html', context)
 
 
 def books(request):
     books = Books.objects.all()
+    book_categories = BookCategories.objects.all()
 
     category_dict = {}
 
@@ -38,7 +52,8 @@ def books(request):
     context = {
         "books": "active",
         "all_books": books,
-        "category": category_dict
+        "category": category_dict,
+        "book_categories": book_categories
     }
 
     return render(request, 'books.html', context=context)
@@ -174,3 +189,51 @@ def about(request):
         "about": "active"
     }
     return render(request, 'about-us.html', context)
+
+def search(request):
+    if request.method == "POST":
+        if 'searched' in request.POST:
+            searched = request.POST.get('searched')
+
+            books = Books.objects.filter(book_name__contains=searched) | Books.objects.filter(author_name__contains=searched)
+
+            book_categories = BookCategories.objects.all()
+
+            category_dict = {}
+
+            for book in books:
+                item = book.book_category
+                category = item.split(',')
+
+                category_dict[book.id] = category
+            
+    context = {
+        "searched": searched,
+        "all_books": books,
+        "category": category_dict,
+    }
+    return render(request, 'search.html', context=context)
+
+def filter_books(request):
+
+    if request.method == "POST":
+        searched_category = request.POST.get('category')
+
+        books = Books.objects.filter(book_category__contains=searched_category)
+        book_categories = BookCategories.objects.all()
+
+        category_dict = {}
+
+        for book in books:
+            item = book.book_category
+            category = item.split(',')
+
+            category_dict[book.id] = category
+
+    context = {
+        'searched_category': searched_category,
+        "category": category_dict,
+        'book_categories': book_categories,
+        'all_books': books
+    }
+    return render(request, 'filter.html', context=context)

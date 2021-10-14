@@ -1,27 +1,9 @@
 {% extends 'main.html' %}
 {% load static %}
 
-{% block title %} All Books Section - BookHub {% endblock %}
+{% block title %} {{ searched }} | Search - BookHub {% endblock %}
 
 {% block content %}
-    <!-- ========== Filter section ========== -->
-    <section>
-        <div class="filter_bar d-flex justify-content-end align-items-center">
-          <div class="container d-flex flex-row justify-content-start align-items-center filter-container mx-3">
-            <form method="post" action="{% url 'filter' %}">
-            {% csrf_token %}
-              <select name="category" class="cat_filter">
-                <option value="none" selected disabled>Category</option>
-                {% for category in book_categories %}
-                  <option value="{{ category.category }}">{{ category.category }}</option>
-                {% endfor %}
-              </select>
-              <button type="submit" class="btn btn-dark">Filter</button>
-            </form>
-          </div>
-        </div>
-    </section>
-    <!-- ========== Filter section ========== -->
 
     <!-- ============= Books page starts here ==================== -->
 
@@ -122,7 +104,10 @@
                   </a>
                   <!-- ------- Book card -------- -->
                   {% endfor %}
-                
+                {% else %}
+
+                <img src="../static/images/no_result_found.png" class="img img-fluid">
+
                 {% endif %}
 
               </div>

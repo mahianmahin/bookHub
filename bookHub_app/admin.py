@@ -10,3 +10,11 @@ class BooksAdmin(admin.ModelAdmin):
 @admin.register(BooksReview)
 class BookReviewAdmin(admin.ModelAdmin):
     list_display = ['book', 'user', 'star']
+
+@admin.register(Quote)
+class QuoteAdmin(admin.ModelAdmin):
+    list_display = ['id', 'source']
+
+@admin.register(BookCategories)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'category']

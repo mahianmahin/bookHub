@@ -182,6 +182,7 @@ def userDashboard(request):
     if request.user.is_authenticated:
         book_review = BooksReview.objects.filter(user=request.user)
         books = Books.objects.filter(uploader=request.user)
+        book_categories = BookCategories.objects.all()
 
         global user_profile_ins
         user_profile_ins = UserProfile.objects.filter(user_id=request.user.id).first()
@@ -258,7 +259,8 @@ def userDashboard(request):
         context = {
             'user_profile_ins': user_profile_ins,
             'book_reviews': book_review,
-            'books': books
+            'books': books,
+            'categories': book_categories
         }
 
         return render(request, 'dashboard.html', context=context)
