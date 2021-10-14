@@ -111,8 +111,10 @@ def book_details(request, id, name):
 
 
 def blogs(request):
+    blogs_ins = Blogs.objects.all()
     context = {
-        "blogs": "active"
+        "blogs": "active",
+        "blogs_ins": blogs_ins
     }
     return render(request, 'all-blogs.html', context)
 
