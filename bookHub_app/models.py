@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -27,5 +29,8 @@ class Blogs(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=250, null=True, blank=True)
-    img = models.ImageField()
-    created_time = models.DateTimeField()
+    thumbnail = models.ImageField(upload_to='blog_img')
+    created_time = models.DateTimeField(default=datetime.now(),)
+
+    def __str__(self):
+        return self.title

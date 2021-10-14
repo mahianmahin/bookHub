@@ -761,6 +761,7 @@ input[type="number"]:focus,
 /* ----single-blog-page ------ */
 .author-info img{
   align-items: center;
+  width: 250px;
   height: 250px;
   border-radius: 50%;
 }
