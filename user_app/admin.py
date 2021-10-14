@@ -7,3 +7,4 @@ from .models import *
 @admin.register(UserProfile)
 class UserAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'occupation']
+

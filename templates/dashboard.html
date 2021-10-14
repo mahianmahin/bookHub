@@ -15,7 +15,8 @@
                     <img src={% static '/images/user.jpg' %}> <br>
                 {% endif %}
                 <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
-                <small><i>Boi: {{ user_profile_ins.bio }}</i></small>
+                <h6>{{ request.user.email }}</h6>
+                <small><i>{{ user_profile_ins.bio }}</i></small>
             </div>
 
             <div class="col-sm-7 my-3 profile_info">
@@ -46,60 +47,29 @@
             </div>
         </div>
 
+        {% if book_reviews %}
         <!-- ------review row----------- -->
         <div class="row review_section my-5">
             <h3>Your Reviews</h3>
             <!-- Slider container -->
             <div class="review_slider d-flex flex-row align-items-center">
-                <!-- Single review card start -->
-                <div class="review_card shadow">
-                    <a href="#"><h5>Title of book</h5></a>
-                    <div class="review_description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ex in nesciunt facere odit incidunt temporibus eveniet ullam voluptatem natus......</p>
+                {% for review in book_reviews %}
+                    <!-- Single review card start -->
+                    <div class="review_card shadow">
+                        <h5>{{ review.book.book_name }}</h5>
+                        <div class="review_description">
+                            <p>{{ review.review | truncatewords:18 }}</p>
+                        </div>
                     </div>
-                </div>
-                <!-- Single review card end -->
-                
-                <!-- Single review card start -->
-                <div class="review_card shadow">
-                    <a href="#"><h5>Title of book</h5></a>
-                    <div class="review_description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ex in nesciunt facere odit incidunt temporibus eveniet ullam voluptatem natus......</p>
-                    </div>
-                </div>
-                <!-- Single review card end -->
-
-                <!-- Single review card start -->
-                <div class="review_card shadow">
-                    <a href="#"><h5>Title of book</h5></a>
-                    <div class="review_description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ex in nesciunt facere odit incidunt temporibus eveniet ullam voluptatem natus......</p>
-                    </div>
-                </div>
-                <!-- Single review card end -->
-
-                <!-- Single review card start -->
-                <div class="review_card shadow">
-                    <a href="#"><h5>Title of book</h5></a>
-                    <div class="review_description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ex in nesciunt facere odit incidunt temporibus eveniet ullam voluptatem natus......</p>
-                    </div>
-                </div>
-                <!-- Single review card end -->
-
-                <!-- Single review card start -->
-                <div class="review_card shadow">
-                    <a href="#"><h5>Title of book</h5></a>
-                    <div class="review_description">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ex in nesciunt facere odit incidunt temporibus eveniet ullam voluptatem natus......</p>
-                    </div>
-                </div>
-                <!-- Single review card end -->
+                    <!-- Single review card end -->
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
 
         <div class="row uploaded_books mt-5">
             <h3>Your Uploaded Books</h3>
+            {% if books %}
             <table class="table table-hover mt-3">
                 <thead>
                   <tr class="bg-dark text-white">
@@ -109,23 +79,18 @@
                   </tr>
                 </thead>
                 <tbody>
+                {% for book in books %}
                   <tr>
-                    <td>Chader Pahar by Bibhutibhushon Bondhopaddhay</td>
-                    <td>19 September 2021</td>
-                    <td><a href="#"><button class="btn btn-danger">Delete</button></a></td>
+                    <td>{{ book.book_name }}</td>
+                    <td>{{ book.uploaded_time }}</td>
+                    <td><a href={% url 'delete' book.id %}><button class="btn btn-danger">Delete</button></a></td>
                   </tr>
-                  <tr>
-                    <td>Nuliyachorir Shonar Pahar by Shariar Kobir</td>
-                    <td>13 September 2021</td>
-                    <td><a href="#"><button class="btn btn-danger">Delete</button></a></td>
-                  </tr>
-                  <tr>
-                    <td>Himu Shomogro by Humayun Ahmed</td>
-                    <td>11 September 2021</td>
-                    <td><a href="#"><button class="btn btn-danger">Delete</button></a></td>
-                  </tr>
+                {% endfor %}
                 </tbody>
             </table>
+            {% else %}
+                <h6 class="my-3">You haven't uploaded any book yet</h6>
+            {% endif %}
         </div>
 
         <div class="row add_book_section">

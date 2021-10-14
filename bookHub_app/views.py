@@ -42,8 +42,41 @@ def books(request):
 
     return render(request, 'books.html', context=context)
 
+def rating_updater(id, book, rating):
+    if rating == 0:
+        book.book_rating = 0.0
+    else:
+        book.book_rating = rating
+    book.save()
+
+    return rating
+
+def delete_book(request, id):
+    book_ins = Books.objects.get(pk=id)
+    book_ins.delete()
+
+    return redirect('/user-dashboard')
+
 def book_details(request, id, name):
     book = Books.objects.get(pk=id)
+    reviews = BooksReview.objects.filter(book=book)
+
+    try:
+        rating_raw = 0
+
+        for rating in reviews:
+            rating_raw += rating.star
+
+        rating = rating_raw / len(reviews)
+        rating = round(rating, 1)
+
+
+        avg_rating = rating_updater(id, book, rating)
+    except:
+        avg_rating = 0
+        rating = 0
+
+
     
     # response = HttpResponse(book.book, content_type='application/pdf')
     # response['Content-Disposition'] = 'filename=%s' % book.book
@@ -59,15 +92,19 @@ def book_details(request, id, name):
             book = book,
             user = request.user,
             review = review,
-            star = rating_star
+            star = rating_star,
         )
 
         review_ins.save()
         messages.info(request, "Review saved")
+        return redirect('/book_details/' + str(id) + '/' + name + '/')
         
 
     context = {
-        "book": book
+        "book": book,
+        "reviews": reviews,
+        "rating": rating,
+        "review_count": len(reviews)
     }
 
     return render(request, 'book-details.html', context=context)
