@@ -21,6 +21,7 @@ def home(request):
     }
     return render(request, 'index.html', context)
 
+
 def books(request):
     books = Books.objects.all()
 
@@ -29,7 +30,7 @@ def books(request):
     for book in books:
         item = book.book_category
         category = item.split(',')
-        
+
         category_dict[book.id] = category
 
     println(category_dict)
@@ -42,6 +43,7 @@ def books(request):
 
     return render(request, 'books.html', context=context)
 
+
 def rating_updater(id, book, rating):
     if rating == 0:
         book.book_rating = 0.0
@@ -51,11 +53,13 @@ def rating_updater(id, book, rating):
 
     return rating
 
+
 def delete_book(request, id):
     book_ins = Books.objects.get(pk=id)
     book_ins.delete()
 
     return redirect('/user-dashboard')
+
 
 def book_details(request, id, name):
     book = Books.objects.get(pk=id)
@@ -70,17 +74,14 @@ def book_details(request, id, name):
         rating = rating_raw / len(reviews)
         rating = round(rating, 1)
 
-
         avg_rating = rating_updater(id, book, rating)
     except:
         avg_rating = 0
         rating = 0
 
-
-    
     # response = HttpResponse(book.book, content_type='application/pdf')
     # response['Content-Disposition'] = 'filename=%s' % book.book
-    
+
     if request.method == "POST":
         review = request.POST.get('review')
         rating_star = request.POST.get('rating_stars')
@@ -89,16 +90,15 @@ def book_details(request, id, name):
         println(rating_star)
 
         review_ins = BooksReview(
-            book = book,
-            user = request.user,
-            review = review,
-            star = rating_star,
+            book=book,
+            user=request.user,
+            review=review,
+            star=rating_star,
         )
 
         review_ins.save()
         messages.info(request, "Review saved")
         return redirect('/book_details/' + str(id) + '/' + name + '/')
-        
 
     context = {
         "book": book,
@@ -109,25 +109,47 @@ def book_details(request, id, name):
 
     return render(request, 'book-details.html', context=context)
 
+
 def blogs(request):
     context = {
         "blogs": "active"
     }
     return render(request, 'all-blogs.html', context)
 
+
 def my_blog(request):
     if request.user.is_authenticated:
+        my_blog_ins = Blogs.objects.filter(user_id=request.user.id).exists()
+        if my_blog_ins:
+            my_blogs = Blogs.objects.filter(user_id=request.user.id)
+        else:
+            my_blogs = {}
+        if request.method == "POST":
+            title = request.POST.get('title')
+            description = request.POST.get('description')
+            thumbnail = request.FILES['img']
+            blog_ins = Blogs(user_id=request.user.id, title=title, description=description, thumbnail=thumbnail)
+            blog_ins.save()
+
+            context = {
+                "my_blog": "active",
+            }
+            return redirect('my_blog')
+
         context = {
-            "my_blog": "active"
+            "my_blog": "active",
+            "my_blogs": my_blogs
         }
         return render(request, 'blog.html', context)
-    
+
     else:
         messages.warning(request, "You must be logged in")
         return redirect('/login')
 
+
 def single_blog(request):
     return render(request, 'single-blog.html')
+
 
 def contact(request):
     context = {
@@ -135,9 +157,9 @@ def contact(request):
     }
     return render(request, 'contact.html', context)
 
+
 def about(request):
     context = {
         "about": "active"
     }
     return render(request, 'about-us.html', context)
-
