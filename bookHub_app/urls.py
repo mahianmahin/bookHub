@@ -15,4 +15,5 @@ urlpatterns = [
     path('delete/<int:id>/', delete_book, name="delete"),
     path('search/', search, name="search"),
     path('filter/', filter_books, name="filter"),
+    path('subscribe/', subscribe, name="subscribe"),
 ]

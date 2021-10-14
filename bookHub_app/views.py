@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.admin.decorators import register
 from django.http import HttpResponse, response
 from django.shortcuts import redirect, render
 from user_app.models import UserProfile
@@ -237,3 +238,22 @@ def filter_books(request):
         'all_books': books
     }
     return render(request, 'filter.html', context=context)
+
+def subscribe(request):
+    subscribers = Subscribers.objects.all()
+
+    if request.method == "POST":
+        subs_email = request.POST.get('subs_email')
+
+        for subs in subscribers:
+            if subs_email == subs.email:
+                messages.warning(request, "You are already subscribed")
+                return redirect('/')
+            else:
+                subscribers_ins = Subscribers(email=subs_email)
+                subscribers_ins.save()
+                messages.info(request, "Subscribed")
+
+                # send welcome email here
+
+    return redirect('/')

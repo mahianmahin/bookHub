@@ -30,8 +30,9 @@
 
           <div class="my-3 col-sm-3 d-flex flex-column justify-content-center align-items-center footer_subscribe">
             <h3 class="my-3">Subscribe</h3>
-            <form class="form-group subscription-form d-flex flex-row">
-              <input type="text" class="form-control" placeholder="Enter email">
+            <form class="form-group subscription-form d-flex flex-row" method="post" action="{% url 'subscribe' %}">
+            {% csrf_token %}
+              <input type="text" class="form-control" placeholder="Enter email" name="subs_email" required>
               <button type="submit">SUBSCRIBE</button>
             </form>
           </div>
