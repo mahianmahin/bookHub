@@ -1,0 +1,122 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %} {{ searched }} | Search - BookHub {% endblock %}
+
+{% block content %}
+
+    <!-- ============= Books page starts here ==================== -->
+
+    <section class="my-5">
+        <div class="container">
+            <div class="d-flex flex-row justify-content-center align-items-center">
+              <div class="book-card-section d-flex flex-row justify-content-start flex-wrap">
+                
+                {% if all_books %}
+                  {% for book in all_books %}
+                  <!-- ------- Book card -------- -->
+                  <a href={% url 'book_details' id=book.id name=book.book_name %}>
+                    <div class="book-card d-flex flex-column shadow">  
+                      <img class="book_avatar_img w-100" src={{ book.book_thumbnail.url }}>
+                      <div class="name_section d-flex flex-column py-2 px-3">
+                        <h5>{{ book.book_name }}</h5>
+                        <span>{{ book.author_name }}</span>
+                      </div>
+
+                      <div class="category_section d-flex flex-row flex-wrap py-2 px-2">
+                        {% for key, value in category.items %}
+                          {% if key == book.id %}
+                            {% for item in value %}
+                              <div class="category_box d-flex justify-content-center align-items-center">{{ item }}</div>
+                            {% endfor %}
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+
+                      <div class="rating_section d-flex flex-row justify-content-center align-items-start py-2 px-3">
+                      {% if book.book_rating <= .9 %}
+                        <div class="rate_num">{{ book.book_rating }}</div>
+                        <div class="rate_stars mx-2">
+                          <i class="far fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                        </div>
+                      {% endif %}
+                      
+                      {% if book.book_rating >= 1.0 and book.book_rating <= 1.9 %}
+                        <div class="rate_num">{{ book.book_rating }}</div>
+                        <div class="rate_stars mx-2">
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                        </div>
+                      {% endif %}
+                      
+                      {% if book.book_rating >= 2.0 and book.book_rating <= 2.9 %}
+                        <div class="rate_num">{{ book.book_rating }}</div>
+                        <div class="rate_stars mx-2">
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                        </div>
+                      {% endif %}
+                      
+                      {% if book.book_rating >= 3.0 and book.book_rating <= 3.9 %}
+                        <div class="rate_num">{{ book.book_rating }}</div>
+                        <div class="rate_stars mx-2">
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                        </div>
+                      {% endif %}
+                      
+                      {% if book.book_rating >= 4.0 and book.book_rating <= 4.9 %}
+                        <div class="rate_num">{{ book.book_rating }}</div>
+                        <div class="rate_stars mx-2">
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="far fa-star" id="stars"></i>
+                        </div>
+                      {% endif %}
+                      
+                      {% if book.book_rating == 5.0 %}
+                        <div class="rate_num">{{ book.book_rating }}</div>
+                        <div class="rate_stars mx-2">
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="fas fa-star" id="stars"></i>
+                          <i class="fas fa-star" id="stars"></i>
+                        </div>
+                      {% endif %}
+                      </div>
+                    </div>
+                  </a>
+                  <!-- ------- Book card -------- -->
+                  {% endfor %}
+                {% else %}
+
+                <img src="../static/images/no_result_found.png" class="img img-fluid">
+
+                {% endif %}
+
+              </div>
+            </div>
+          </div>
+    </section>
+
+
+
+    <!-- ============= Books page ends here ==================== -->
+
+{% endblock %}

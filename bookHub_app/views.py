@@ -1,15 +1,14 @@
 from django.contrib import messages
 from django.http import HttpResponse, response
 from django.shortcuts import redirect, render
-# ========== Custom printing function for debugging ============
 from user_app.models import UserProfile
 
 from .models import *
 
+# ========== Custom printing function for debugging ============
 
 def println(text):
     print("\n====================\n", text, "\n====================\n")
-
 
 # ========== Custom printing function for debugging ============
 
@@ -188,3 +187,16 @@ def about(request):
         "about": "active"
     }
     return render(request, 'about-us.html', context)
+
+def search(request):
+    if request.method == "POST":
+        if 'searched' in request.POST:
+            searched = request.POST.get('searched')
+
+            books = Books.objects.filter(book_name__contains=searched) | Books.objects.filter(author_name__contains=searched)
+            
+    context = {
+        "searched": searched,
+        "all_books": books
+    }
+    return render(request, 'search.html', context=context)

@@ -12,8 +12,9 @@
         <div class="col-sm-6 d-flex justify-content-center">
           <!-- Search bar -->
           <div class="search-bar my-3">
-            <form method="post" class="d-flex flex-row">
-              <input type="text" name="search" placeholder="Search by book name or writter name"/>
+            <form method="post" action="{% url 'search' %}" class="d-flex flex-row">
+            {% csrf_token %}
+              <input type="text" name="searched" placeholder="Search by book name or writter name"/>
               <button type="submit"><i class="fas fa-search"></i></button>
             </form>
           </div>
@@ -84,8 +85,9 @@
         
         <!-- Search bar -->
         <div class="search-bar my-3 phone-search mt-3">
-          <form method="post" class="d-flex flex-row">
-            <input type="text" name="search" placeholder="Search by book name or writter name"/>
+          <form method="post" action="{% url 'search' %}" class="d-flex flex-row">
+          {% csrf_token %}
+            <input type="text" name="searched" placeholder="Search by book name or writter name"/>
             <button type="submit"><i class="fas fa-search"></i></button>
           </form>
         </div>
