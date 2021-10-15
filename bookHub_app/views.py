@@ -247,17 +247,41 @@ def subscribe(request):
 
     if request.method == "POST":
         subs_email = request.POST.get('subs_email')
+        subscribers = Subscribers.objects.all()
 
-        for subs in subscribers:
-            if subs_email == subs.email:
-                messages.warning(request, "You are already subscribed")
-                return redirect('/')
+        subscribers_list = []
+        
+        for email in subscribers:
+            subscribers_list.append(email.email)
+
+        if subs_email in subscribers_list:
+            messages.warning(request, "You are already subscribed")
+        else:
+            subscribers_ins = Subscribers(email=subs_email)
+            subscribers_ins.save()
+            messages.info(request, "Subscribed")
+
+            # send welcome email here
+            if request.user.is_authenticated:
+                recepient = str(request.user.first_name) + " " + str(request.user.last_name)
             else:
-                subscribers_ins = Subscribers(email=subs_email)
-                subscribers_ins.save()
-                messages.info(request, "Subscribed")
+                recepient = subs_email
 
-                # send welcome email here
+            html_content = render_to_string('emails/subscribe_email.html', { 
+                    "recepient": recepient
+                })
+            text_content = strip_tags(html_content)
+
+            email = EmailMultiAlternatives(
+                "Thanks for subscribing",
+                text_content,
+                "BookHub Team",
+                [subs_email]
+            )
+
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+
 
     return redirect('/')
 

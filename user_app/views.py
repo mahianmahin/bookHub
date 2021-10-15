@@ -36,6 +36,23 @@ def signup(request):
         user_profile.save()
         messages.success(request, "Registered Successfully!")
 
+        recepient = f_name + " " + l_name
+
+        html_content = render_to_string('emails/signup_email.html', { 
+                "recepient": recepient
+            })
+        text_content = strip_tags(html_content)
+
+        email = EmailMultiAlternatives(
+            "Thanks for signing up",
+            text_content,
+            "BookHub Team",
+            [email]
+        )
+
+        email.attach_alternative(html_content, "text/html")
+        email.send()
+
         return redirect('login')
     return render(request, 'signup.html')
 
