@@ -35,10 +35,11 @@
                 <div class="form-section col-sm-6 my-3 d-flex justify-content-center align-items-center">
                   <div class="w-100">
                     <h3 class="mb-2">Contact us</h3>
-                    <form class="form-group contact-form">
-                      <input type="text" class="form-control" placeholder="Your Name" required>
-                      <input type="email" class="form-control" placeholder="Your Email Address" required>
-                      <input type="email" class="form-control" placeholder="Your Subject" required>
+                    <form class="form-group contact-form" method="post">
+                    {% csrf_token %}
+                      <input type="text" class="form-control" placeholder="Your Name" name="name" required>
+                      <input type="email" class="form-control" placeholder="Your Email Address" name="email" required>
+                      <input type="email" class="form-control" placeholder="Your Subject" name="subject" required>
                       <textarea class="form-control" rows="6" required placeholder="Your Message"></textarea>
                       <button type="submit" class="btn btn-dark w-100 mt-2">Send</button>
                     </form>

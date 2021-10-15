@@ -18,3 +18,7 @@ class QuoteAdmin(admin.ModelAdmin):
 @admin.register(BookCategories)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['id', 'category']
+
+@admin.register(Subscribers)
+class SubscribersAdmin(admin.ModelAdmin):
+    list_display = ['id', 'email']

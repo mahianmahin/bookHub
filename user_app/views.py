@@ -4,9 +4,11 @@ from bookHub_app.models import *
 from django.contrib import auth, messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 # ========== Custom printing function for debugging ============
 from user_app.models import UserProfile
