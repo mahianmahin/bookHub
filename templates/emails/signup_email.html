@@ -1,0 +1,31 @@
+ {% extends '../main2.html' %} {% load static %} {% block title %} Thanks for signing up {% endblock %} {% block content %} {% block style %}
+<style>
+    .mail_header {
+        height: 160px;
+        width: 100%;
+        /* padding-top: 60px; */
+        background: #80D5F9;
+    }
+</style>
+{% endblock %}
+<header class="mail_header d-flex justify-content-center align-items-center">
+    <img src="../../static/images/logo.png" class="img img-thumbnail">
+</header>
+
+<main class="container my-5">
+    <h2>Welcome on board {{ recepient }},</h2>
+    <p>Thanks for signing up here. BookHub is a place where you can share knowledge by uploading new books and also aquire knowledge by reading as many books as you can for free. We are happy to be with you and we hope you're going to have an wonderful journey
+        through the pages of books with us.</p>
+
+    <p>You can also upload blogs here to share what's on your mind in our BookHub community</p>
+    <p><b>Contact us: bookhubinfo@gmail.com</b></p>
+    <br><br>
+
+    <span>
+        <b>
+            Thanks <br>
+            -BookHub Team
+        </b>
+    </span>
+</main>
+{% endblock %}

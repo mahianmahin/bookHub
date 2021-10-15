@@ -1,7 +1,10 @@
 from django.contrib import messages
 from django.contrib.admin.decorators import register
+from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse, response
 from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from user_app.models import UserProfile
 
 from .models import *
@@ -257,3 +260,4 @@ def subscribe(request):
                 # send welcome email here
 
     return redirect('/')
+
