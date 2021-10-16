@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.admin.decorators import register
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponse, response
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
@@ -77,6 +77,8 @@ def delete_book(request, id):
     book_ins = Books.objects.get(pk=id)
     book_ins.delete()
 
+    messages.info(request, "Book deleted")
+
     return redirect('/user-dashboard')
 
 
@@ -152,6 +154,8 @@ def my_blog(request):
             blog_ins = Blogs(user_id=request.user.id, title=title, description=description, thumbnail=thumbnail)
             blog_ins.save()
 
+            messages.info(request, "Blog uploaded")
+
             context = {
                 "my_blog": "active",
             }
@@ -182,6 +186,39 @@ def single_blog(request,id, title):
 
 
 def contact(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        msg = name + "\n" + email + "\n" + subject + "\n\n" + message
+
+        send_mail(
+            "Someone wants to contact BookHub",
+            msg,
+            "BookHub Team",
+            ['mahianmahin@yahoo.com', 'shuvro.aps.75@gmail.com'],
+            fail_silently=False
+        )
+
+        recepient = name
+
+        html_content = render_to_string('emails/contact_email.html', { 
+                "recepient": recepient
+            })
+        text_content = strip_tags(html_content)
+
+        email = EmailMultiAlternatives(
+            "Contact Response",
+            text_content,
+            "BookHub Team",
+            [email]
+        )
+
+        email.attach_alternative(html_content, "text/html")
+        email.send()
+
     context = {
         "contact": "active"
     }
