@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.admin.decorators import register
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives, send_mail
 from django.http import HttpResponse, response
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
@@ -77,6 +77,8 @@ def delete_book(request, id):
     book_ins = Books.objects.get(pk=id)
     book_ins.delete()
 
+    messages.info(request, "Book deleted")
+
     return redirect('/user-dashboard')
 
 
@@ -152,6 +154,8 @@ def my_blog(request):
             blog_ins = Blogs(user_id=request.user.id, title=title, description=description, thumbnail=thumbnail)
             blog_ins.save()
 
+            messages.info(request, "Blog uploaded")
+
             context = {
                 "my_blog": "active",
             }
@@ -182,6 +186,39 @@ def single_blog(request,id, title):
 
 
 def contact(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        msg = name + "\n" + email + "\n" + subject + "\n\n" + message
+
+        send_mail(
+            "Someone wants to contact BookHub",
+            msg,
+            "BookHub Team",
+            ['mahianmahin@yahoo.com', 'shuvro.aps.75@gmail.com'],
+            fail_silently=False
+        )
+
+        recepient = name
+
+        html_content = render_to_string('emails/contact_email.html', { 
+                "recepient": recepient
+            })
+        text_content = strip_tags(html_content)
+
+        email = EmailMultiAlternatives(
+            "Contact Response",
+            text_content,
+            "BookHub Team",
+            [email]
+        )
+
+        email.attach_alternative(html_content, "text/html")
+        email.send()
+
     context = {
         "contact": "active"
     }
@@ -247,17 +284,41 @@ def subscribe(request):
 
     if request.method == "POST":
         subs_email = request.POST.get('subs_email')
+        subscribers = Subscribers.objects.all()
 
-        for subs in subscribers:
-            if subs_email == subs.email:
-                messages.warning(request, "You are already subscribed")
-                return redirect('/')
+        subscribers_list = []
+        
+        for email in subscribers:
+            subscribers_list.append(email.email)
+
+        if subs_email in subscribers_list:
+            messages.warning(request, "You are already subscribed")
+        else:
+            subscribers_ins = Subscribers(email=subs_email)
+            subscribers_ins.save()
+            messages.info(request, "Subscribed")
+
+            # send welcome email here
+            if request.user.is_authenticated:
+                recepient = str(request.user.first_name) + " " + str(request.user.last_name)
             else:
-                subscribers_ins = Subscribers(email=subs_email)
-                subscribers_ins.save()
-                messages.info(request, "Subscribed")
+                recepient = subs_email
 
-                # send welcome email here
+            html_content = render_to_string('emails/subscribe_email.html', { 
+                    "recepient": recepient
+                })
+            text_content = strip_tags(html_content)
+
+            email = EmailMultiAlternatives(
+                "Thanks for subscribing",
+                text_content,
+                "BookHub Team",
+                [subs_email]
+            )
+
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+
 
     return redirect('/')
 

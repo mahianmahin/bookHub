@@ -1,7 +1,12 @@
 from datetime import datetime
 
 from django.contrib.auth.models import User
+from django.core.mail import EmailMultiAlternatives
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
 class Books(models.Model):
@@ -18,6 +23,7 @@ class Books(models.Model):
 
     def __str__(self):
         return self.book_name + '.pdf'
+
 
 class BooksReview(models.Model):
     book = models.ForeignKey(Books, on_delete=models.CASCADE)
@@ -44,3 +50,56 @@ class BookCategories(models.Model):
 
 class Subscribers(models.Model):
     email = models.EmailField(max_length=300)
+
+
+# Signal for new book upload
+@receiver(post_save, sender=Books)
+def at_ending_save(sender, instance, created, **kwargs):
+    if created:
+        subscribers_list = []
+        subs = Subscribers.objects.all()
+
+        for subscribers in subs:
+            subscribers_list.append(subscribers.email)
+
+        print(subscribers_list)
+
+        html_content = render_to_string('emails/new_book_email.html')
+        text_content = strip_tags(html_content)
+
+        email = EmailMultiAlternatives(
+            "A new book has just been uploaded",
+            text_content,
+            "BookHub Team",
+            subscribers_list
+        )
+
+        email.attach_alternative(html_content, "text/html")
+        email.send()
+        
+# Signal for new blog upload
+@receiver(post_save, sender=Blogs)
+def at_ending_save(sender, instance, created, **kwargs):
+    if created:
+        subscribers_list = []
+        subs = Subscribers.objects.all()
+
+        for subscribers in subs:
+            subscribers_list.append(subscribers.email)
+
+        print(subscribers_list)
+
+        html_content = render_to_string('emails/new_blog_email.html')
+        text_content = strip_tags(html_content)
+
+        email = EmailMultiAlternatives(
+            "A new blog has just been uploaded",
+            text_content,
+            "BookHub Team",
+            subscribers_list
+        )
+
+        email.attach_alternative(html_content, "text/html")
+        email.send()
+        
+
