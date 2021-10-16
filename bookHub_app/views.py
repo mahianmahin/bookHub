@@ -19,6 +19,7 @@ def println(text):
 
 # Create your views here.
 def home(request):
+    site_utils = SiteUtils.objects.all()
     reviews = BooksReview.objects.all()
     quotes = Quote.objects.all()
 
@@ -30,6 +31,7 @@ def home(request):
         "home": "active",
         "reviews": reviews,
         "quotes": quotes,
+        "utils": site_utils,
 
         "books_len": len(books),
         "blogs_len": len(blogs),
@@ -226,8 +228,11 @@ def contact(request):
 
 
 def about(request):
+    site_utils = SiteUtils.objects.all()
+
     context = {
-        "about": "active"
+        "about": "active",
+        "utils": site_utils
     }
     return render(request, 'about-us.html', context)
 

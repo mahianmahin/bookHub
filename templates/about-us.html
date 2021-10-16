@@ -9,11 +9,13 @@
     <section id="about-section" style="background-image: url(/static/images/paralax-book.jpg);">
         <div class="container">
             <div class="row">
+            {% for util in utils %}
                 <div class="text-white">
                     <h2 class="text-center fw-bolder my-5">About Us</h2>
-                    <p class="fw-bold text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, sint odio similique ea aut aliquid perspiciatis harum, aspernatur suscipit porro quisquam earum dolores at vitae, laboriosam accusantium rerum cupiditate. Praesentium vero quis rerum impedit molestias voluptatem voluptatibus perferendis fuga veritatis reiciendis eius officiis, ad modi a cumque numquam voluptatum nam maiores molestiae accusantium excepturi. Sapiente esse praesentium, corporis architecto iure dignissimos quasi totam commodi voluptatem eius ullam, maxime quam reprehenderit harum laborum optio labore hic ipsam aut magni, quisquam quos reiciendis nesciunt! Excepturi, iste earum, iusto nisi aliquam corporis ut consequuntur recusandae odio dicta, molestiae quos! Eaque distinctio nam temporibus.</p>
+                    <p class="fw-bold text-justify">{{ util.about_us_text }}</p>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </section>
     <!-- about us end -->

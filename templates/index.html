@@ -7,26 +7,14 @@
 
     <div class="container">
       <div class="row my-5 mx-4">
+      {% for util in utils %}
         <div class="col-sm-6 welcome-section">
           <h1>Welcome folks,</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt,
-            voluptates laboriosam molestiae accusantium sapiente tenetur
-            suscipit cupiditate assumenda magnam reiciendis quis culpa, quasi
-            veniam harum eveniet ad odio iste vero voluptatem enim vel
-            aspernatur ut? Ut obcaecati earum ratione iure provident labore
-            voluptates quam culpa fugit doloribus vel natus sunt repellat,
-            perspiciatis vitae quia porro corporis, ullam aliquam expedita
-            placeat officiis temporibus. Consequatur quis eos rem praesentium?
-            Et laborum nulla qui explicabo error enim, dolore reiciendis labore
-            magnam magni illum, sed, unde optio ratione. Nam labore quia
-            consequuntur optio. Adipisci sed quisquam iusto nisi impedit tenetur
-            ad eveniet quidem magnam.aesentium? Et laborum nulla qui explicabo
-            error enim, dolore reiciendis labore magnam magni illum, sed, unde
-            optio ratione. Nam labore quia consequuntur optio. Adipisci sed
-            quisquam iusto nisi impedit tenetur ad eveniet quidem magnam.
+            {{ util.home_text }}
           </p>
         </div>
+      {% endfor %}
         <div class=" col-sm-6 animation-section d-flex justify-content-center align-items-center" id="hide">
           <img src="./static/img/animation.gif" />
         </div>

@@ -22,3 +22,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Subscribers)
 class SubscribersAdmin(admin.ModelAdmin):
     list_display = ['id', 'email']
+
+@admin.register(SiteUtils)
+class SiteAdmin(admin.ModelAdmin):
+    list_display = ['id']
