@@ -117,13 +117,25 @@ def code_authentication(request):
             auth_number = str(auth_number)
             message_body = "Your password recovery code - " + auth_number
             println(message_body)
-            send_mail(
-                'Password Reset',
-                message_body,
-                'BookHub Info',
-                [email_auth],
-                fail_silently=False
+            
+            recepient = email_auth
+
+            html_content = render_to_string('emails/reset_pass_email.html', { 
+                    "recepient": recepient,
+                    "code": auth_number
+                })
+            text_content = strip_tags(html_content)
+
+            email = EmailMultiAlternatives(
+                "Password Recovery",
+                text_content,
+                "BookHub Team",
+                [email_auth]
             )
+
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+            
 
         if request.method == "POST":
             verification_code = request.POST.get('code')
