@@ -44,8 +44,7 @@
                                 <a href={% url 'single_blog' id=blog.id title=blog.title %}> <input
                                          value="Details" class="btn details-btn">
                                 </a>
-                                <input type="submit" value="Update" class="btn update-btn">
-                                <input type="submit" value="Delete" class="btn delete-btn">
+                                <a href={% url 'delete_blog' blog.id %}><button class="btn btn-danger">Delete</button></a>
                             </div>
                         </div>
                     </div>

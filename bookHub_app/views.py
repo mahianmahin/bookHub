@@ -108,7 +108,8 @@ def book_details(request, id, name):
         # from django.templatetags.static import static
 
         # fs = FileSystemStorage()
-        # filename = book.book
+        filename = book.book.url
+        print(type(filename), filename)
         # if fs.exists(filename):
         #     println("Exists")
         #     with fs.open(filename) as pdf:
@@ -203,6 +204,11 @@ def single_blog(request,id, title):
     }
     return render(request, 'single-blog.html', context)
 
+def delete_blog(request, id):
+    blog_ins = Blogs.objects.get(id=id)
+    blog_ins.delete()
+    messages.info(request, "Book deleted")
+    return redirect('/my_blog')
 
 def contact(request):
     if request.method == "POST":
