@@ -6,7 +6,8 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from user_app.models import UserProfile
-
+import os
+from django.conf import settings
 from .models import *
 
 # ========== Custom printing function for debugging ============
@@ -109,18 +110,23 @@ def book_details(request, id, name):
 
         # fs = FileSystemStorage()
         filename = book.book.url
-        print(type(filename), filename)
+        print(filename)
+        path = open(filename, 'rb')
+        # with open(path, 'rb') as pdf:
+        #     print(pdf)
+        print(type(path))
         # if fs.exists(filename):
         #     println("Exists")
         #     with fs.open(filename) as pdf:
         #         response = HttpResponse(pdf, content_type='application/pdf')
         #         #response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"' #user will be prompted with the browser’s open/save file
         #         response['Content-Disposition'] = 'inline; filename="mypdf.pdf"' #user will be prompted display the PDF in the browser
+        #
         #         return response
         # else:
         #     return HttpResponseNotFound('The requested pdf was not found in our server.')
 
-        # println(response)
+        println(response)
 
 
     if request.method == "POST":
