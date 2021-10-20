@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.admin.decorators import register
 from django.core.mail import EmailMultiAlternatives, send_mail
-from django.http import HttpResponse, response
+from django.http import FileResponse, HttpResponse, response
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -19,6 +19,7 @@ def println(text):
 
 # Create your views here.
 def home(request):
+    site_utils = SiteUtils.objects.all()
     reviews = BooksReview.objects.all()
     quotes = Quote.objects.all()
 
@@ -30,6 +31,7 @@ def home(request):
         "home": "active",
         "reviews": reviews,
         "quotes": quotes,
+        "utils": site_utils,
 
         "books_len": len(books),
         "blogs_len": len(blogs),
@@ -85,23 +87,40 @@ def delete_book(request, id):
 def book_details(request, id, name):
     book = Books.objects.get(pk=id)
     reviews = BooksReview.objects.filter(book=book)
+    if request.method == "GET":
 
-    try:
-        rating_raw = 0
+        try:
+            rating_raw = 0
 
-        for rating in reviews:
-            rating_raw += rating.star
+            for rating in reviews:
+                rating_raw += rating.star
 
-        rating = rating_raw / len(reviews)
-        rating = round(rating, 1)
+            rating = rating_raw / len(reviews)
+            rating = round(rating, 1)
 
-        avg_rating = rating_updater(id, book, rating)
-    except:
-        avg_rating = 0
-        rating = 0
+            avg_rating = rating_updater(id, book, rating)
+        except:
+            avg_rating = 0
+            rating = 0
 
-    # response = HttpResponse(book.book, content_type='application/pdf')
-    # response['Content-Disposition'] = 'filename=%s' % book.book
+        # from django.core.files.storage import FileSystemStorage
+        # from django.http import HttpResponse, HttpResponseNotFound
+        # from django.templatetags.static import static
+
+        # fs = FileSystemStorage()
+        # filename = book.book
+        # if fs.exists(filename):
+        #     println("Exists")
+        #     with fs.open(filename) as pdf:
+        #         response = HttpResponse(pdf, content_type='application/pdf')
+        #         #response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"' #user will be prompted with the browser’s open/save file
+        #         response['Content-Disposition'] = 'inline; filename="mypdf.pdf"' #user will be prompted display the PDF in the browser
+        #         return response
+        # else:
+        #     return HttpResponseNotFound('The requested pdf was not found in our server.')
+
+        # println(response)
+
 
     if request.method == "POST":
         review = request.POST.get('review')
@@ -226,8 +245,11 @@ def contact(request):
 
 
 def about(request):
+    site_utils = SiteUtils.objects.all()
+
     context = {
-        "about": "active"
+        "about": "active",
+        "utils": site_utils
     }
     return render(request, 'about-us.html', context)
 

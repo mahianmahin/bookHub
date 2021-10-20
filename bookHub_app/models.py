@@ -51,6 +51,10 @@ class BookCategories(models.Model):
 class Subscribers(models.Model):
     email = models.EmailField(max_length=300)
 
+class SiteUtils(models.Model):
+    home_text = models.TextField()
+    about_us_text = models.TextField()
+
 
 # Signal for new book upload
 @receiver(post_save, sender=Books)
