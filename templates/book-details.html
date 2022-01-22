@@ -75,8 +75,8 @@
           </div>
 
           <div class="col-sm-8">
-            <iframe src="{{ book.book.url }}" height="800px" width="100%" class="pdf_box"></iframe>
-            {% comment %} <embed src="{{ book.book.url }}" height="800px" width="100%" class="pdf_box"> {% endcomment %}
+{#            <iframe src="{{ book.book.url }}" height="800px" width="100%" class="pdf_box"></iframe>#}
+             <embed src="{{ book.book.url }}" type="application/pdf" height="800px" width="100%" class="pdf_box">
             {% comment %} <iframe src='/media/pdf/Python_2nd_part.pdf#toolbar=0' height="800px" width="100%" class="pdf_box"></iframe> {% endcomment %}
             {% comment %} <iframe src={{ book.book.url }} type="application/pdf" height="800px" width="100%" class="pdf_box"></iframe> {% endcomment %}
           </div>
