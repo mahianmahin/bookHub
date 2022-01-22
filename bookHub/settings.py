@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'user_app',
     'bookHub_app',
 ]
-
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
