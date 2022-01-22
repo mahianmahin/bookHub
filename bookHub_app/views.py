@@ -10,10 +10,12 @@ import os
 from django.conf import settings
 from .models import *
 
+
 # ========== Custom printing function for debugging ============
 
 def println(text):
     print("\n====================\n", text, "\n====================\n")
+
 
 # ========== Custom printing function for debugging ============
 
@@ -88,49 +90,48 @@ def delete_book(request, id):
 def book_details(request, id, name):
     book = Books.objects.get(pk=id)
     reviews = BooksReview.objects.filter(book=book)
-    if request.method == "GET":
+    # if request.method == "GET":
 
-        try:
-            rating_raw = 0
+    try:
+        rating_raw = 0
 
-            for rating in reviews:
-                rating_raw += rating.star
+        for rating in reviews:
+            rating_raw += rating.star
 
-            rating = rating_raw / len(reviews)
-            rating = round(rating, 1)
+        rating = rating_raw / len(reviews)
+        rating = round(rating, 1)
 
-            avg_rating = rating_updater(id, book, rating)
-        except:
-            avg_rating = 0
-            rating = 0
+        avg_rating = rating_updater(id, book, rating)
+    except:
+        avg_rating = 0
+        rating = 0
 
-        from django.core.files.storage import FileSystemStorage
-        from django.http import HttpResponse, HttpResponseNotFound
-        from django.templatetags.static import static
+    from django.core.files.storage import FileSystemStorage
+    from django.http import HttpResponse, HttpResponseNotFound
+    from django.templatetags.static import static
 
-        fs = FileSystemStorage()
-        filename = book.book.url
-        print(filename)
+    fs = FileSystemStorage()
+    filename = book.book.url
+    print(filename)
 
-        # return render(request, 'book-details.html', {'book': book})
-        # path = open(filename, 'rb')
-        # with open(path, 'rb') as pdf:
-        #     print(pdf)
-        # print(type(path))
-        # if fs.exists(filename):
-        #     println("Exists")
-        #     with fs.open(filename) as pdf:
-        #         response = HttpResponse(pdf, content_type='application/pdf')
-        #         #response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"' #user will be prompted with the browser’s open/save file
-        #         response['Content-Disposition'] = 'inline; filename="mypdf.pdf"' #user will be prompted display the PDF in the browser
+    # return render(request, 'book-details.html', {'book': book})
+    # path = open(filename, 'rb')
+    # with open(path, 'rb') as pdf:
+    #     print(pdf)
+    # print(type(path))
+    # if fs.exists(filename):
+    #     println("Exists")
+    #     with fs.open(filename) as pdf:
+    #         response = HttpResponse(pdf, content_type='application/pdf')
+    #         #response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"' #user will be prompted with the browser’s open/save file
+    #         response['Content-Disposition'] = 'inline; filename="mypdf.pdf"' #user will be prompted display the PDF in the browser
 
-                # return response
+    # return response
 
-        # else:
-        #     return HttpResponseNotFound('The requested pdf was not found in our server.')
+    # else:
+    #     return HttpResponseNotFound('The requested pdf was not found in our server.')
 
-        println(response)
-
+    # println(response)
 
     if request.method == "POST":
         review = request.POST.get('review')
@@ -201,7 +202,7 @@ def my_blog(request):
         return redirect('/login')
 
 
-def single_blog(request,id, title):
+def single_blog(request, id, title):
     blog_ins = Blogs.objects.get(id=id)
     blog_author = blog_ins.user_id
 
@@ -213,11 +214,13 @@ def single_blog(request,id, title):
     }
     return render(request, 'single-blog.html', context)
 
+
 def delete_blog(request, id):
     blog_ins = Blogs.objects.get(id=id)
     blog_ins.delete()
     messages.info(request, "Book deleted")
     return redirect('/my_blog')
+
 
 def contact(request):
     if request.method == "POST":
@@ -238,9 +241,9 @@ def contact(request):
 
         recepient = name
 
-        html_content = render_to_string('emails/contact_email.html', { 
-                "recepient": recepient
-            })
+        html_content = render_to_string('emails/contact_email.html', {
+            "recepient": recepient
+        })
         text_content = strip_tags(html_content)
 
         email = EmailMultiAlternatives(
@@ -268,12 +271,14 @@ def about(request):
     }
     return render(request, 'about-us.html', context)
 
+
 def search(request):
     if request.method == "POST":
         if 'searched' in request.POST:
             searched = request.POST.get('searched')
 
-            books = Books.objects.filter(book_name__contains=searched) | Books.objects.filter(author_name__contains=searched)
+            books = Books.objects.filter(book_name__contains=searched) | Books.objects.filter(
+                author_name__contains=searched)
 
             book_categories = BookCategories.objects.all()
 
@@ -284,7 +289,7 @@ def search(request):
                 category = item.split(',')
 
                 category_dict[book.id] = category
-            
+
     context = {
         "searched": searched,
         "all_books": books,
@@ -292,8 +297,8 @@ def search(request):
     }
     return render(request, 'search.html', context=context)
 
-def filter_books(request):
 
+def filter_books(request):
     if request.method == "POST":
         searched_category = request.POST.get('category')
 
@@ -316,6 +321,7 @@ def filter_books(request):
     }
     return render(request, 'filter.html', context=context)
 
+
 def subscribe(request):
     subscribers = Subscribers.objects.all()
 
@@ -324,7 +330,7 @@ def subscribe(request):
         subscribers = Subscribers.objects.all()
 
         subscribers_list = []
-        
+
         for email in subscribers:
             subscribers_list.append(email.email)
 
@@ -341,9 +347,9 @@ def subscribe(request):
             else:
                 recepient = subs_email
 
-            html_content = render_to_string('emails/subscribe_email.html', { 
-                    "recepient": recepient
-                })
+            html_content = render_to_string('emails/subscribe_email.html', {
+                "recepient": recepient
+            })
             text_content = strip_tags(html_content)
 
             email = EmailMultiAlternatives(
@@ -356,6 +362,4 @@ def subscribe(request):
             email.attach_alternative(html_content, "text/html")
             email.send()
 
-
     return redirect('/')
-
