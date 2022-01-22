@@ -104,25 +104,28 @@ def book_details(request, id, name):
             avg_rating = 0
             rating = 0
 
-        # from django.core.files.storage import FileSystemStorage
-        # from django.http import HttpResponse, HttpResponseNotFound
-        # from django.templatetags.static import static
+        from django.core.files.storage import FileSystemStorage
+        from django.http import HttpResponse, HttpResponseNotFound
+        from django.templatetags.static import static
 
-        # fs = FileSystemStorage()
+        fs = FileSystemStorage()
         filename = book.book.url
         print(filename)
-        path = open(filename, 'rb')
+
+        # return render(request, 'book-details.html', {'book': book})
+        # path = open(filename, 'rb')
         # with open(path, 'rb') as pdf:
         #     print(pdf)
-        print(type(path))
+        # print(type(path))
         # if fs.exists(filename):
         #     println("Exists")
         #     with fs.open(filename) as pdf:
         #         response = HttpResponse(pdf, content_type='application/pdf')
         #         #response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"' #user will be prompted with the browser’s open/save file
         #         response['Content-Disposition'] = 'inline; filename="mypdf.pdf"' #user will be prompted display the PDF in the browser
-        #
-        #         return response
+
+                # return response
+
         # else:
         #     return HttpResponseNotFound('The requested pdf was not found in our server.')
 
